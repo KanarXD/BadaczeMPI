@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(BadaczeMPI)
-
+add_definitions(-D_DEBUG)
 set(CMAKE_CXX_STANDARD 20)
 
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -pedantic -lm -O3 -funroll-loops")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
-add_executable(app src/main.cpp)
+add_executable(app src/main.cpp src/threads/CommunicationThread.cpp src/threads/CommunicationThread.h src/threads/MainThread.cpp src/threads/MainThread.h src/models.h src/utility/Log.h src/utility/Log.cpp)
 
 # OpenMP
 find_package(OpenMP)
