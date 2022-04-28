@@ -29,21 +29,22 @@ int main(int argCount, char **args) {
     check_thread_support(provided);
 
     Settings settings = {atoi(args[1]), atoi(args[2]), atoi(args[3]), atoi(args[4])};
-    std::cout << "Hello, World!" << std::endl;
-    LOGINFO(settings);
+    LOGINFO("Settings: ", settings);
 
-    ProcessData processData;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-    srand(rank);
+    ProcessData processData(1);
+    MPI_Comm_rank(MPI_COMM_WORLD, &processData.processId);
+    MPI_Comm_size(MPI_COMM_WORLD, &processData.processCount);
 
+    LOGINFO("ThreadId: ", processData.processId);
+
+    sleep(1);
 
     return 0;
 }
 
 
 void check_thread_support(int provided) {
-    LOGINFO("THREAD SUPPORT: chcemy", provided, ". Co otrzymamy?\n");
+    LOGINFO("THREAD SUPPORT: chcemy: ", provided, ". Co otrzymamy?\n");
     switch (provided) {
         case MPI_THREAD_SINGLE:
             LOGINFO("Brak wsparcia dla wątków, kończę\n");

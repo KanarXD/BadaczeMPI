@@ -23,11 +23,10 @@ struct ProcessData {
     int processCount;
     std::vector<int> *groupList;
 
-    ProcessData(int processId, int clock, int processCount, int groupSize) : processId(processId),
-                                                                             clock(0),
-                                                                             processCount(processCount),
-                                                                             groupList(
-                                                                                     new std::vector<int>[groupSize]) {}
+    ProcessData(int groupSize) :
+            clock(0),
+            groupList(
+                    new std::vector<int>[groupSize]) {}
 
     friend std::ostream &operator<<(std::ostream &os, const ProcessData &data) {
         os << "processId: " << data.processId << " clock: " << data.clock << " processCount: " << data.processCount
