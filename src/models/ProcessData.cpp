@@ -5,7 +5,6 @@ ProcessData::ProcessData(int processId, int processCount, int groupSize, const S
         processCount(processCount),
         groupList(std::vector<std::vector<int>>(groupSize)),
         settings(settings) {
-
 }
 
 int ProcessData::getClock() const {
