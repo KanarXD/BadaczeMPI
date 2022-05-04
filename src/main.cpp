@@ -1,47 +1,42 @@
-//
-#include <iostream>
 #include <mpi.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
 #include <unistd.h>
-#include <string.h>
-#include <pthread.h>
+#include "threads/MainThread.h"
 #include "utility/Log.h"
-#include "models.h"
+#include "models/Settings.h"
 
-
-#define ARG_COUNT 5
-
+#define ARG_COUNT 4
 
 void check_thread_support(int);
 
 int main(int argCount, char **args) {
 
     if (argCount < ARG_COUNT) {
-        LOGERROR("Too few arguments, args num: ", argCount);
+        LOGERROR("Too few arguments, args num: ", argCount, "Required args (processCount)");
         exit(-1);
     }
 
-    int provided;
-    MPI_Init_thread(&argCount, &args, MPI_THREAD_MULTIPLE, &provided);
-
-    check_thread_support(provided);
-
-    Settings settings = {atoi(args[1]), atoi(args[2]), atoi(args[3]), atoi(args[4])};
+    Settings settings = {atoi(args[1]), atoi(args[2]), atoi(args[3])};
     LOGINFO("Settings: ", settings);
 
-    ProcessData processData(1);
-    MPI_Comm_rank(MPI_COMM_WORLD, &processData.processId);
-    MPI_Comm_size(MPI_COMM_WORLD, &processData.processCount);
+    int provided;
+    MPI_Init_thread(&argCount, &args, MPI_THREAD_MULTIPLE, &provided);
+    check_thread_support(provided);
 
-    LOGINFO("ThreadId: ", processData.processId);
+    int processId, processCount;
+    MPI_Comm_rank(MPI_COMM_WORLD, &processId);
+    MPI_Comm_size(MPI_COMM_WORLD, &processCount);
 
-    sleep(1);
+    std::shared_ptr<ProcessData> processData =
+            std::make_shared<ProcessData>(processId, processCount, settings.groupSize, settings);
+
+    LOGINFO("ThreadId: ", processData->getProcessId());
+
+    MainThread mainThread(processData);
+    mainThread.Start();
+
 
     return 0;
 }
-
 
 void check_thread_support(int provided) {
     LOGINFO("THREAD SUPPORT: chcemy: ", provided, ". Co otrzymamy?\n");
