@@ -13,5 +13,7 @@ public:
 
 private:
     void requestResource(ResourceType resourceType, int responseCount);
+
+    void releaseResource(ResourceType type);
 };
 

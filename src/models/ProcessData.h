@@ -10,7 +10,6 @@ class ProcessData {
 private:
     std::mutex clockMutex;
     std::mutex groupListMutex;
-    std::mutex processStateMutex;
     std::mutex waitResourceMutex;
     int clock = 0;
     int processId;

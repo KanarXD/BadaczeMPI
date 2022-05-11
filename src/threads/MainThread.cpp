@@ -20,6 +20,7 @@ void MainThread::Start() {
                 getProcessData()->setProcessState(ProcessState::REQUESTING_GROUP);
                 break;
             case REQUESTING_GROUP:
+                getProcessData()->setProcessState(ProcessState::RELEASING);
                 break;
                 requestResource(ResourceType::GROUP, getProcessData()->getSettings().processCount -
                                                      getProcessData()->getSettings().UNRCount);
@@ -28,6 +29,10 @@ void MainThread::Start() {
                 if (Functions::makeDecision(30)) {
 
                 }
+                break;
+            case RELEASING:
+//                releaseResource(ResourceType::GROUP);
+                releaseResource(ResourceType::UNR);
                 break;
             case SLEEPING:
                 if (getProcessData()->getProcessId() == 0) {
@@ -53,3 +58,16 @@ void MainThread::requestResource(ResourceType resourceType, int responseCount) {
     }
     std::lock_guard _{getProcessData()->getWaitResourceMutex()};
 }
+
+void MainThread::releaseResource(ResourceType resourceType) {
+    Message message{getProcessData()->getProcessId(),
+                    getProcessData()->incrementClock(),
+                    MessageType::RELEASE,
+                    resourceType};
+    LOGINFO("Sending release messages: ", message);
+    for (int i = 0; i < getProcessData()->getSettings().processCount; ++i) {
+        MPI_Send(&message, sizeof(Message), MPI_BYTE, i, 0, MPI_COMM_WORLD);
+    }
+}
+
+

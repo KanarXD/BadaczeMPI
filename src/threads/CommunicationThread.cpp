@@ -39,7 +39,7 @@ void CommunicationThread::HandleCommunication() {
 }
 
 void CommunicationThread::handleRequest(const Message &message) {
-    if (getProcessData()->getProcessState() == SLEEPING) {
+    if (getProcessData()->getProcessState() == SLEEPING || getProcessData()->getProcessState() == RELEASING) {
         sendAck(message);
     } else {
         addToWaitingList(message);
