@@ -20,20 +20,19 @@ int main(int argCount, char **args) {
 
     int provided;
     MPI_Init_thread(&argCount, &args, MPI_THREAD_MULTIPLE, &provided);
-    check_thread_support(provided);
+//    check_thread_support(provided);
 
-    int processId, processCount;
+    int processId;
     MPI_Comm_rank(MPI_COMM_WORLD, &processId);
-    MPI_Comm_size(MPI_COMM_WORLD, &processCount);
+    MPI_Comm_size(MPI_COMM_WORLD, &settings.processCount);
 
     std::shared_ptr<ProcessData> processData =
-            std::make_shared<ProcessData>(processId, processCount, settings.groupSize, settings);
+            std::make_shared<ProcessData>(processId, settings.groupSize, settings);
 
     LOGINFO("ThreadId: ", processData->getProcessId());
 
     MainThread mainThread(processData);
     mainThread.Start();
-
 
     return 0;
 }

@@ -10,3 +10,4 @@
 #include <atomic>
 #include <random>
 #include "utility/Log.h"
+#include "utility/Functions.h"

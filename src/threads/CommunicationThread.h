@@ -1,11 +1,10 @@
 #pragma once
 
-
-#include <atomic>
 #include <thread>
-#include "../models/ProcessData.h"
 #include "BaseThread.h"
+#include "../models/ProcessData.h"
 #include "../models/Message.h"
+
 
 class CommunicationThread : public BaseThread {
 private:
@@ -22,10 +21,12 @@ public:
 private:
     void HandleCommunication();
 
-    void handleRequest(const Message& message);
+    void handleRequest(const Message &message);
 
-    void sendAck(const Message& incomingMessage);
+    void sendAck(const Message &incomingMessage);
 
     void addToWaitingList(const Message &message);
+
+    void handleAck(const Message &message);
 };
 

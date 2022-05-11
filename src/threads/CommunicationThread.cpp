@@ -1,5 +1,4 @@
 #include "CommunicationThread.h"
-#include "../models/Message.h"
 #include "../pch.h"
 
 CommunicationThread::CommunicationThread(std::shared_ptr<ProcessData> &processData) : BaseThread(processData) {
@@ -29,9 +28,12 @@ void CommunicationThread::HandleCommunication() {
             case REQUEST:
                 handleRequest(message);
                 break;
+            case ACK:
+                handleAck(message);
+                break;
 
         }
-        LOGINFO("Message: ", message);
+        LOGINFO("Received message: ", message);
 
     }
 }
@@ -60,8 +62,21 @@ void CommunicationThread::sendAck(const Message &incomingMessage) {
                             getProcessData()->incrementClock(),
                             MessageType::ACK,
                             incomingMessage.resourceType};
-    LOGINFO("Sending: ", outgoingMessage);
+    LOGINFO("Sending ACK to: ", incomingMessage.processId);
     MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
+}
+
+void CommunicationThread::handleAck(const Message &message) {
+    if ((message.resourceType == ResourceType::UNR &&
+         getProcessData()->getProcessState() == ProcessState::REQUESTING_UNR)
+        ||
+        (message.resourceType == ResourceType::GROUP &&
+         getProcessData()->getProcessState() == ProcessState::REQUESTING_GROUP)) {
+        getProcessData()->setAckCount(getProcessData()->getAckCount() - 1);
+        if (getProcessData()->getAckCount() <= 0) {
+            getProcessData()->getWaitResourceMutex().unlock();
+        }
+    }
 }
 
 

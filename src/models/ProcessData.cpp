@@ -1,8 +1,7 @@
 #include "ProcessData.h"
 
-ProcessData::ProcessData(int processId, int processCount, int groupSize, const Settings &settings) :
+ProcessData::ProcessData(int processId, int groupSize, const Settings &settings) :
         processId(processId),
-        processCount(processCount),
         groupList(std::vector<std::vector<int>>(groupSize)),
         settings(settings) {
 }
@@ -13,10 +12,6 @@ int ProcessData::getClock() const {
 
 int ProcessData::getProcessId() const {
     return processId;
-}
-
-int ProcessData::getProcessCount() const {
-    return processCount;
 }
 
 int ProcessData::incrementClock() {
@@ -44,6 +39,18 @@ ProcessState ProcessData::getProcessState() const {
     return processState;
 }
 
-void ProcessData::setProcessState(ProcessState processState) {
-    ProcessData::processState = processState;
+void ProcessData::setProcessState(ProcessState state) {
+    ProcessData::processState = state;
+}
+
+std::mutex &ProcessData::getWaitResourceMutex() {
+    return waitResourceMutex;
+}
+
+int ProcessData::getAckCount() const {
+    return ackCount;
+}
+
+void ProcessData::setAckCount(int count) {
+    ProcessData::ackCount = count;
 }

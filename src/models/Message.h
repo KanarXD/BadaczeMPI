@@ -12,7 +12,7 @@ struct Message {
 
     friend std::ostream &operator<<(std::ostream &os, const Message &message) {
         os << "processId: " << message.processId << " clock: " << message.clock << " messageType: "
-           << getRequestType(message.messageType) << " resourceType: " << getResourceName(message.resourceType);
+           << getMessageType(message.messageType) << " resourceType: " << getResourceName(message.resourceType);
         return os;
     }
 
@@ -27,7 +27,7 @@ struct Message {
         }
     }
 
-    static std::string getRequestType(MessageType type) {
+    static std::string getMessageType(MessageType type) {
         switch (type) {
             case END:
                 return "END";
@@ -35,6 +35,8 @@ struct Message {
                 return "REQUEST";
             case RELEASE:
                 return "RELEASE";
+            case ACK:
+                return "ACK";
         }
     }
 };
