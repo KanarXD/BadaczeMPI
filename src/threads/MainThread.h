@@ -3,6 +3,7 @@
 #include "CommunicationThread.h"
 #include "../models/ProcessData.h"
 #include "BaseThread.h"
+#include "../enums/ResourceType.h"
 
 class MainThread : public BaseThread {
 private:
@@ -13,6 +14,7 @@ public:
     void Start() override;
 
 private:
-    static void sleep();
+    void RequestResource(ResourceType resourceType, int responseCount);
+    static void Sleep();
 };
 

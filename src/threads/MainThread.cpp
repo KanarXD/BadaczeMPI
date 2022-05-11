@@ -15,16 +15,20 @@ void MainThread::Start() {
     setRunning(true);
     communicationThread.Start();
     while (isRunning()) {
-        getProcessData()->increaseClock();
-        Message message{getProcessData()->getProcessId(), getProcessData()->getClock()};
+        getProcessData()->incrementClock();
+        Message message{getProcessData()->getProcessId(), getProcessData()->getClock(), MessageType::END, ResourceType::NONE};
         MPI_Send(&message, sizeof(Message), MPI_BYTE, rand() % getProcessData()->getProcessCount(), 0,
                  MPI_COMM_WORLD);
-        sleep();
+        Sleep();
     }
     communicationThread.Stop();
 }
 
-void MainThread::sleep() {
+void MainThread::Sleep() {
     std::this_thread::sleep_for(
             std::chrono::milliseconds(MIN_SLEEP_TIME + rand() % (MAX_SLEEP_TIME - MIN_SLEEP_TIME)));
+}
+
+void MainThread::RequestResource(ResourceType resourceType, int responseCount) {
+
 }

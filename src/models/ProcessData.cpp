@@ -19,9 +19,9 @@ int ProcessData::getProcessCount() const {
     return processCount;
 }
 
-void ProcessData::increaseClock() {
+int ProcessData::incrementClock() {
     std::lock_guard _{clockMutex};
-    clock++;
+    return ++clock;
 }
 
 void ProcessData::setClock(int newClock) {
@@ -38,4 +38,12 @@ void ProcessData::addProcessToGroup(int group, int process) {
 
 const Settings &ProcessData::getSettings() const {
     return settings;
+}
+
+ProcessState ProcessData::getProcessState() const {
+    return processState;
+}
+
+void ProcessData::setProcessState(ProcessState processState) {
+    ProcessData::processState = processState;
 }

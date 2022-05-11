@@ -14,10 +14,10 @@ public:
     virtual void Start() = 0;
     virtual void Stop() {};
 
-    [[nodiscard]] bool isRunning() const;
+    bool isRunning() const;
 
     void setRunning(bool running);
 
-    [[nodiscard]] const std::shared_ptr<ProcessData> &getProcessData() const;
+    const std::shared_ptr<ProcessData> &getProcessData() const;
 
 };
