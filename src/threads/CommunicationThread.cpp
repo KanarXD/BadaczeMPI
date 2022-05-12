@@ -33,7 +33,7 @@ void CommunicationThread::HandleCommunication() {
                 break;
 
         }
-        LOGINFO("Received message: ", message);
+        LOG("Received message: ", message);
 
     }
 }
@@ -62,7 +62,7 @@ void CommunicationThread::sendAck(const Message &incomingMessage) {
                             getProcessData()->incrementClock(),
                             MessageType::ACK,
                             incomingMessage.resourceType};
-    LOGINFO("Sending ACK to: ", incomingMessage.processId);
+    LOG("Sending ACK to: ", incomingMessage.processId);
     MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
 }
 

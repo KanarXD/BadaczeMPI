@@ -12,6 +12,7 @@ public:
     explicit BaseThread(std::shared_ptr<ProcessData> &processData);
 
     virtual void Start() = 0;
+
     virtual void Stop() {};
 
     [[nodiscard]] bool isRunning() const;

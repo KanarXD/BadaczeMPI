@@ -16,7 +16,7 @@ void MainThread::Start() {
             case REQUESTING_UNR:
                 requestResource(ResourceType::UNR, getProcessData()->getSettings().processCount -
                                                    getProcessData()->getSettings().UNRCount);
-                LOGINFO("Changing state to: ", ProcessState::REQUESTING_GROUP);
+                LOG("Changing state to: ", ProcessState::REQUESTING_GROUP);
                 getProcessData()->setProcessState(ProcessState::REQUESTING_GROUP);
                 break;
             case REQUESTING_GROUP:
@@ -52,7 +52,7 @@ void MainThread::requestResource(ResourceType resourceType, int responseCount) {
                     getProcessData()->incrementClock(),
                     MessageType::REQUEST,
                     resourceType};
-    LOGINFO("Sending request messages: ", message);
+    LOG("Sending request messages: ", message);
     for (int i = 0; i < getProcessData()->getSettings().processCount; ++i) {
         MPI_Send(&message, sizeof(Message), MPI_BYTE, i, 0, MPI_COMM_WORLD);
     }
@@ -64,7 +64,7 @@ void MainThread::releaseResource(ResourceType resourceType) {
                     getProcessData()->incrementClock(),
                     MessageType::RELEASE,
                     resourceType};
-    LOGINFO("Sending release messages: ", message);
+    LOG("Sending release messages: ", message);
     for (int i = 0; i < getProcessData()->getSettings().processCount; ++i) {
         MPI_Send(&message, sizeof(Message), MPI_BYTE, i, 0, MPI_COMM_WORLD);
     }
