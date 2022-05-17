@@ -5,8 +5,7 @@
 #define MIN_SLEEP_TIME 200
 #define MAX_SLEEP_TIME 2000
 
-class Functions {
-public:
+namespace Functions {
 
     static void sleep() {
         std::this_thread::sleep_for(

@@ -23,7 +23,6 @@ void CommunicationThread::HandleCommunication() {
         MPI_Recv(&message, sizeof(Message), MPI_BYTE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
         getProcessData()->setClock(message.clock);
 
-
         switch (message.messageType) {
             case REQUEST:
                 handleRequest(message);
@@ -31,7 +30,11 @@ void CommunicationThread::HandleCommunication() {
             case ACK:
                 handleAck(message);
                 break;
-
+            case RELEASE:
+                handleRelease(message);
+                break;
+            case END:
+                break;
         }
         LOG("Received message: ", message);
 
@@ -53,6 +56,8 @@ void CommunicationThread::addToWaitingList(const Message &message) {
             break;
         case GROUP:
             groupWaitingList.push_back(message.processId);
+            break;
+        case NONE:
             break;
     }
 }
@@ -76,6 +81,19 @@ void CommunicationThread::handleAck(const Message &message) {
         if (getProcessData()->getAckCount() <= 0) {
             getProcessData()->getWaitResourceMutex().unlock();
         }
+    }
+}
+
+void CommunicationThread::handleRelease(Message message) {
+
+    switch (message.resourceType) {
+        case GROUP:
+
+            break;
+        case UNR:
+            break;
+        case NONE:
+            break;
     }
 }
 

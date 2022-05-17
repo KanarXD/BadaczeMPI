@@ -35,7 +35,7 @@ void MainThread::Start() {
                 releaseResource(ResourceType::UNR);
                 break;
             case SLEEPING:
-                if (getProcessData()->getProcessId() == 0) {
+                if (Functions::makeDecision(30)) {
                     getProcessData()->setProcessState(ProcessState::REQUESTING_UNR);
                 }
                 break;

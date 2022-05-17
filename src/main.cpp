@@ -1,5 +1,4 @@
 #include <mpi.h>
-#include <unistd.h>
 #include "threads/MainThread.h"
 #include "utility/Log.h"
 #include "models/Settings.h"
@@ -11,12 +10,12 @@ void check_thread_support(int);
 int main(int argCount, char **args) {
 
     if (argCount < ARG_COUNT) {
-        LOGINFO("Too few arguments, args num: ", argCount, "Required args (processCount)");
+        LOGINFO("Too few arguments, args num: ", argCount);
+        LOGINFO("Required args count: ", ARG_COUNT - 1, " (groupSize, UNRCount, GroupCount)");
         exit(-1);
     }
 
     Settings settings = {atoi(args[1]), atoi(args[2]), atoi(args[3])};
-    LOGINFO("Settings: ", settings);
 
     int provided;
     MPI_Init_thread(&argCount, &args, MPI_THREAD_MULTIPLE, &provided);
@@ -26,6 +25,7 @@ int main(int argCount, char **args) {
     MPI_Comm_rank(MPI_COMM_WORLD, &processId);
     MPI_Comm_size(MPI_COMM_WORLD, &settings.processCount);
 
+    LOGINFO("Settings: ", settings);
 
     std::shared_ptr<ProcessData> processData =
             std::make_shared<ProcessData>(processId, settings.groupSize, settings);
@@ -39,6 +39,7 @@ int main(int argCount, char **args) {
 
     return 0;
 }
+
 //
 //void check_thread_support(int provided) {
 //    LOGINFO("THREAD SUPPORT: chcemy: ", provided, ". Co otrzymamy?\n");

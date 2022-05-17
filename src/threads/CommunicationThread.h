@@ -28,5 +28,7 @@ private:
     void addToWaitingList(const Message &message);
 
     void handleAck(const Message &message);
+
+    void handleRelease(Message message);
 };
 
