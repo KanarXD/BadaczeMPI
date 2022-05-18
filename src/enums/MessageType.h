@@ -1,8 +1,7 @@
 #pragma once
 
-using RequestCode = unsigned short;
 
-enum MessageType : RequestCode {
+enum MessageType : unsigned short {
     ACK = 3,
     RELEASE = 2,
     REQUEST = 1,

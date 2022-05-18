@@ -3,7 +3,7 @@
 #include <thread>
 
 #define MIN_SLEEP_TIME 200
-#define MAX_SLEEP_TIME 2000
+#define MAX_SLEEP_TIME 1000
 
 namespace Functions {
 
@@ -15,5 +15,7 @@ namespace Functions {
     static bool makeDecision(int percentChance) {
         return percentChance > rand() % 100;
     }
+
+
 
 };

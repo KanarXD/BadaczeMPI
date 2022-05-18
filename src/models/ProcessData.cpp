@@ -69,3 +69,7 @@ int ProcessData::getGroupId() const {
 void ProcessData::setGroupId(int groupId) {
     ProcessData::groupId = groupId;
 }
+
+int ProcessData::getProcessCountInGroup(int group) const {
+    return groupList[group].size();
+}

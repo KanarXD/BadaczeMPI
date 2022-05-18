@@ -35,6 +35,8 @@ public:
 
     void removeProcessFromGroup(int group, int process);
 
+    int getProcessCountInGroup(int group) const;
+
     [[nodiscard]] ProcessState getProcessState() const;
 
     void setProcessState(ProcessState state);

@@ -17,11 +17,9 @@ void CommunicationThread::Stop() {
 
 void CommunicationThread::HandleCommunication() {
     while (isRunning()) {
-
         Message message{};
         MPI_Status status;
         MPI_Recv(&message, sizeof(Message), MPI_BYTE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
-        getProcessData()->setClock(message.clock);
 
         LOG("Received message: ", message);
         switch (message.messageType) {
@@ -37,15 +35,29 @@ void CommunicationThread::HandleCommunication() {
             case END:
                 break;
         }
+        getProcessData()->setClock(message.clock);
+
     }
 }
 
 void CommunicationThread::handleRequest(const Message &message) {
-    if (getProcessData()->getProcessState() == SLEEPING) {
+    if (
+            getProcessData()->getProcessState() == SLEEPING ||
+            message.processId == getProcessData()->getProcessId() ||
+            message.clock < getProcessData()->getClock() ||
+            (message.clock == getProcessData()->getClock() || message.processId < getProcessData()->getProcessId())
+            ) {
+        LOG("ACk1");
         sendAck(message);
-    } else if ((getProcessData()->getProcessState() == REQUESTING_UNR && message.resourceType == GROUP) ||
-               (getProcessData()->getProcessState() == IN_GROUP && message.resourceType == GROUP &&
-                message.groupId != getProcessData()->getGroupId())) {
+        LOG("ACk2");
+        sendAck(message);
+        LOG("ACk2 ended");
+    } else if (
+            (getProcessData()->getProcessState() == REQUESTING_UNR && message.resourceType == GROUP)
+            ||
+            (getProcessData()->getProcessState() == IN_GROUP && message.resourceType == GROUP &&
+             message.groupId != getProcessData()->getGroupId())
+            ) {
         getProcessData()->addProcessToGroup(message.groupId, message.processId);
         sendAck(message);
     } else {
@@ -67,16 +79,17 @@ void CommunicationThread::addToWaitingList(const Message &message) {
 }
 
 void CommunicationThread::sendAck(const Message &incomingMessage) {
+    LOG("sendAck, Sending ACK to: ", incomingMessage.processId);
     Message outgoingMessage{getProcessData()->getProcessId(),
                             getProcessData()->incrementClock(),
                             MessageType::ACK,
                             incomingMessage.resourceType};
 
-    LOG("Sending ACK to: ", incomingMessage.processId);
     MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
 }
 
 void CommunicationThread::handleAck(const Message &message) {
+    LOG("handleAck, ack: ", getProcessData()->getAckCount());
     if (
             (message.resourceType == ResourceType::UNR &&
              getProcessData()->getProcessState() == ProcessState::REQUESTING_UNR)
@@ -90,6 +103,7 @@ void CommunicationThread::handleAck(const Message &message) {
 }
 
 void CommunicationThread::releaseMainThread() const {
+    LOG("releaseMainThread, ack: ", getProcessData()->getAckCount());
     if (getProcessData()->getAckCount() <= 0) {
         return;
     }
@@ -101,12 +115,12 @@ void CommunicationThread::releaseMainThread() const {
 
 void CommunicationThread::handleRelease(Message incomingMessage) {
     if (incomingMessage.resourceType == GROUP) {
+        LOG("handleRelease, Sending ACK to id: ", incomingMessage.processId);
         getProcessData()->removeProcessFromGroup(incomingMessage.groupId, incomingMessage.processId);
         Message outgoingMessage{getProcessData()->getProcessId(),
                                 getProcessData()->incrementClock(),
                                 MessageType::ACK,
                                 incomingMessage.resourceType};
-        LOG("Sending ACK to id: ", incomingMessage.processId);
         MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
     } else if (incomingMessage.resourceType == UNR) {
         handleAck(incomingMessage);
