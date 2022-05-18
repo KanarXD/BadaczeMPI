@@ -26,7 +26,7 @@ void MainThread::Start() {
                         getProcessData()->getSettings().GroupCount - getProcessData()->getProcessCountInGroup(groupId);
 
                 getProcessData()->setGroupId(groupId);
-                getProcessData()->addProcessToGroup(groupId, getProcessData()->getProcessId());
+//                getProcessData()->addProcessToGroup(groupId, getProcessData()->getProcessId());
 
                 requestResource(ResourceType::GROUP,
                                 getProcessData()->getSettings().processCount - groupSize,
@@ -39,8 +39,8 @@ void MainThread::Start() {
             case IN_GROUP:
                 if (Functions::makeDecision(30)) {
                     LOG("Leaving group");
-                    getProcessData()->removeProcessFromGroup(getProcessData()->getGroupId(),
-                                                             getProcessData()->getProcessId());
+//                    getProcessData()->removeProcessFromGroup(getProcessData()->getGroupId(),
+//                                                             getProcessData()->getProcessId());
                     releaseResource(ResourceType::GROUP);
                     LOG("Releasing UNR");
                     releaseResource(ResourceType::UNR);
@@ -59,10 +59,11 @@ void MainThread::Start() {
 }
 
 void MainThread::requestResource(ResourceType resourceType, int responseCount, int groupId) {
-    if (responseCount > 0) {
-        getProcessData()->getWaitResourceMutex().lock();
-        getProcessData()->setAckCount(responseCount);
+    if (responseCount <= 0) {
+        return;
     }
+    getProcessData()->getWaitResourceMutex().lock();
+    getProcessData()->setAckCount(responseCount);
 
     Message message{getProcessData()->getProcessId(),
                     getProcessData()->incrementClock(),
@@ -73,15 +74,13 @@ void MainThread::requestResource(ResourceType resourceType, int responseCount, i
     LOG("Sending request messages: ", message, ", waiting for: ", responseCount, " ACK");
     sendToAll(message);
 
-    if (responseCount > 0) {
-        std::lock_guard _{getProcessData()->getWaitResourceMutex()};
-    }
+    std::lock_guard _{getProcessData()->getWaitResourceMutex()};
 }
 
 void MainThread::releaseResource(ResourceType resourceType) {
-    if (resourceType == GROUP) {
+    if (resourceType == GROUP && getProcessData()->getSettings().processCount > 1) {
         getProcessData()->getWaitResourceMutex().lock();
-        getProcessData()->setAckCount(getProcessData()->getSettings().processCount);
+        getProcessData()->setAckCount(getProcessData()->getSettings().processCount - 1);
     }
 
     Message message{getProcessData()->getProcessId(),
@@ -93,7 +92,7 @@ void MainThread::releaseResource(ResourceType resourceType) {
 
     sendToAll(message);
 
-    if (resourceType == GROUP) {
+    if (resourceType == GROUP && getProcessData()->getSettings().processCount > 1) {
         std::lock_guard _{getProcessData()->getWaitResourceMutex()};
     }
 }
