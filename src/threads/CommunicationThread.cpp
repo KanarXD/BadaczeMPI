@@ -47,11 +47,7 @@ void CommunicationThread::handleRequest(const Message &message) {
             message.clock < getProcessData()->getClock() ||
             (message.clock == getProcessData()->getClock() || message.processId < getProcessData()->getProcessId())
             ) {
-        LOG("ACk1");
         sendAck(message);
-        LOG("ACk2");
-        sendAck(message);
-        LOG("ACk2 ended");
     } else if (
             (getProcessData()->getProcessState() == REQUESTING_UNR && message.resourceType == GROUP)
             ||

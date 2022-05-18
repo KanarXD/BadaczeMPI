@@ -10,6 +10,7 @@
 class ProcessData {
 private:
     std::mutex clockMutex;
+    std::mutex groupListMutex;
     std::mutex waitResourceMutex;
     int clock = 0;
     int processId;
@@ -35,7 +36,7 @@ public:
 
     void removeProcessFromGroup(int group, int process);
 
-    int getProcessCountInGroup(int group) const;
+    [[nodiscard]] unsigned long getProcessCountInGroup(int group);
 
     [[nodiscard]] ProcessState getProcessState() const;
 
@@ -47,7 +48,7 @@ public:
 
     void setAckCount(int count);
 
-    int getGroupId() const;
+    [[nodiscard]] int getGroupId() const;
 
     void setGroupId(int groupId);
 

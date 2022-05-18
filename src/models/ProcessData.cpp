@@ -27,15 +27,22 @@ void ProcessData::setClock(int newClock) {
 }
 
 void ProcessData::addProcessToGroup(int group, int process) {
+    std::lock_guard _{groupListMutex};
     groupList[group].push_back(process);
 }
 
 void ProcessData::removeProcessFromGroup(int group, int process) {
+    std::lock_guard _{groupListMutex};
     for (auto i = std::remove_if(groupList[group].begin(), groupList[group].end(), [&](const int &item) {
         return item == process;
     }); i != groupList[group].end(); ++i) {
         groupList[group].erase(i);
     }
+}
+
+unsigned long ProcessData::getProcessCountInGroup(int group) {
+    std::lock_guard _{groupListMutex};
+    return groupList[group].size();
 }
 
 const Settings &ProcessData::getSettings() const {
@@ -68,8 +75,4 @@ int ProcessData::getGroupId() const {
 
 void ProcessData::setGroupId(int groupId) {
     ProcessData::groupId = groupId;
-}
-
-int ProcessData::getProcessCountInGroup(int group) const {
-    return groupList[group].size();
 }
