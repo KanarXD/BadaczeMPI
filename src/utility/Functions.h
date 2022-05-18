@@ -3,8 +3,8 @@
 #include <thread>
 #include <random>
 
-#define MIN_SLEEP_TIME 200
-#define MAX_SLEEP_TIME 1000
+#define MIN_SLEEP_TIME 100
+#define MAX_SLEEP_TIME 500
 
 namespace Functions {
 
@@ -23,6 +23,5 @@ namespace Functions {
     static bool makeDecision(int percentChance) {
         return percentChance > getRandomNumber() % 100;
     }
-
 
 }

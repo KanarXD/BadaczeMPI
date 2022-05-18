@@ -107,6 +107,7 @@ void CommunicationThread::releaseMainThread() const {
     if (getProcessData()->getAckCount() == 0) {
         getProcessData()->getWaitResourceMutex().unlock();
     }
+    LOG("releaseMainThread end, ack: ", getProcessData()->getAckCount());
 }
 
 void CommunicationThread::handleRelease(Message incomingMessage) {

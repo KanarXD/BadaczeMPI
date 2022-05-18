@@ -1,4 +1,5 @@
 #include "ProcessData.h"
+#include "../utility/Log.h"
 
 ProcessData::ProcessData(int processId, int groupSize, const Settings &settings) :
         processId(processId),
@@ -27,11 +28,13 @@ void ProcessData::setClock(int newClock) {
 }
 
 void ProcessData::addProcessToGroup(int group, int process) {
+    LOG("addProcessToGroup");
     std::lock_guard _{groupListMutex};
     groupList[group].push_back(process);
 }
 
 void ProcessData::removeProcessFromGroup(int group, int process) {
+    LOG("removeProcessFromGroup");
     std::lock_guard _{groupListMutex};
     for (auto i = std::remove_if(groupList[group].begin(), groupList[group].end(), [&](const int &item) {
         return item == process;
@@ -40,9 +43,10 @@ void ProcessData::removeProcessFromGroup(int group, int process) {
     }
 }
 
-unsigned long ProcessData::getProcessCountInGroup(int group) {
+int ProcessData::getProcessCountInGroup(int group) {
+    LOG("getProcessCountInGroup");
     std::lock_guard _{groupListMutex};
-    return groupList[group].size();
+    return (int)groupList[group].size();
 }
 
 const Settings &ProcessData::getSettings() const {
