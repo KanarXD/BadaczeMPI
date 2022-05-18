@@ -13,7 +13,7 @@ namespace Functions {
     }
 
     static bool makeDecision(int percentChance) {
-        return rand() % 100 < percentChance;
+        return percentChance > rand() % 100;
     }
 
 };

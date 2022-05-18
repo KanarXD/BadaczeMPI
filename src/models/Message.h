@@ -9,10 +9,12 @@ struct Message {
     int clock;
     MessageType messageType;
     ResourceType resourceType;
+    int groupId;
 
     friend std::ostream &operator<<(std::ostream &os, const Message &message) {
-        os << "processId: " << message.processId << " clock: " << message.clock << " messageType: "
-           << getMessageType(message.messageType) << " resourceType: " << getResourceName(message.resourceType);
+        os << "(processId: " << message.processId << " clock: " << message.clock << " messageType: "
+           << getMessageType(message.messageType) << " resourceType: " << getResourceName(message.resourceType)
+           << " groupId: " << message.groupId << ')';
         return os;
     }
 

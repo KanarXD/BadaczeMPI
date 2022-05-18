@@ -29,6 +29,6 @@ private:
 
     void handleAck(const Message &message);
 
-    void handleRelease(Message message);
+    void handleRelease(Message incomingMessage);
 };
 

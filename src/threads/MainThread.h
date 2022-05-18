@@ -12,7 +12,7 @@ public:
     void Start() override;
 
 private:
-    void requestResource(ResourceType resourceType, int responseCount);
+    void requestResource(ResourceType resourceType, int responseCount, int i);
 
     void releaseResource(ResourceType type);
 };
