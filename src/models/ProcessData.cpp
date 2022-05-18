@@ -2,7 +2,7 @@
 
 ProcessData::ProcessData(int processId, int groupSize, const Settings &settings) :
         processId(processId),
-        groupList(std::vector<std::vector<int>>(groupSize)),
+        groupList(std::vector<std::list<int>>(groupSize)),
         settings(settings) {
 }
 

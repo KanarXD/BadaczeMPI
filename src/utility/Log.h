@@ -30,8 +30,8 @@ public:
     static void LogColored(const M &...message) {
         std::stringstream stream;
         LogMessage(stream, message...);
-        printf("\033[0;%dm[id: %d][clock: %d] %s \033[0;37m\n", color, processData->getProcessId(),
-               processData->getClock(), stream.str().c_str());
+        printf("\033[0;%dm[id: %d][clock: %d][state: %s] %s \033[0;37m\n", color, processData->getProcessId(),
+               processData->getClock(), getResourceName(processData->getProcessState()).c_str(), stream.str().c_str());
     }
 
 private:
@@ -44,6 +44,19 @@ private:
     static void LogMessage(std::ostream &stream, const M &message, const A &...args) {
         stream << message;
         LogMessage(stream, args...);
+    }
+
+    static std::string getResourceName(ProcessState state) {
+        switch (state) {
+            case IN_GROUP:
+                return "IN_GROUP";
+            case REQUESTING_GROUP:
+                return "REQUESTING_GROUP";
+            case REQUESTING_UNR:
+                return "REQUESTING_UNR";
+            case SLEEPING:
+                return "SLEEPING";
+        }
     }
 
 };
