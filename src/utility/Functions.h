@@ -3,8 +3,8 @@
 #include <thread>
 #include <random>
 
-#define MIN_SLEEP_TIME 100
-#define MAX_SLEEP_TIME 500
+#define MIN_SLEEP_TIME 1000
+#define MAX_SLEEP_TIME 1500
 
 namespace Functions {
 

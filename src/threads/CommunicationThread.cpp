@@ -42,6 +42,7 @@ void CommunicationThread::HandleCommunication() {
 
 void CommunicationThread::handleRequest(const Message &message) {
     if (message.resourceType == GROUP) {
+        LOG("added process: ", message.processId, " to group: ", message.groupId);
         getProcessData()->addProcessToGroup(message.groupId, message.processId);
     }
     if (
@@ -100,6 +101,7 @@ void CommunicationThread::releaseMainThread() const {
 void CommunicationThread::handleRelease(Message incomingMessage) {
     if (incomingMessage.resourceType == GROUP) {
         LOG("handleRelease, Sending ACK to id: ", incomingMessage.processId);
+        LOG("removing process: ", incomingMessage.processId, " from group: ", incomingMessage.groupId);
         getProcessData()->removeProcessFromGroup(incomingMessage.groupId, incomingMessage.processId);
         Message outgoingMessage{getProcessData()->getProcessId(),
                                 getProcessData()->incrementClock(),

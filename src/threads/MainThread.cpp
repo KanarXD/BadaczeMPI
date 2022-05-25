@@ -12,24 +12,32 @@ void MainThread::Start() {
     setRunning(true);
     communicationThread.Start();
     while (isRunning()) {
+        std::stringstream groupList;
+        groupList << "groups: ";
+        for (int i = 0; i < getProcessData()->getSettings().GroupCount; ++i) {
+            int groupSize = getProcessData()->getProcessCountInGroup(i);
+            groupList << i << ": " << groupSize << ", ";
+        }
+        LOGSTATE(groupList.str().c_str());
         switch (getProcessData()->getProcessState()) {
-            case REQUESTING_UNR:
-                LOG("Requesting UNR");
-                requestResource(ResourceType::UNR, getProcessData()->getSettings().processCount -
-                                                   getProcessData()->getSettings().UNRCount, 0);
+            case REQUESTING_UNR: {
+                int unrCount = getProcessData()->getSettings().processCount -
+                               getProcessData()->getSettings().UNRCount;
+                LOG("Requesting UNR, count: ", unrCount);
+                requestResource(ResourceType::UNR, unrCount, 0);
                 getProcessData()->setProcessState(ProcessState::REQUESTING_GROUP);
                 LOG("Requesting GROUP");
+            }
                 break;
             case REQUESTING_GROUP: {
                 int groupId = rand() % getProcessData()->getSettings().GroupCount;
                 int groupFreeSlots =
-                        getProcessData()->getSettings().GroupCount - getProcessData()->getProcessCountInGroup(groupId);
-
+                        getProcessData()->getSettings().groupSize - getProcessData()->getProcessCountInGroup(groupId);
+                int groupWaitCount = getProcessData()->getSettings().processCount - groupFreeSlots;
+                LOG("Requesting GROUP, count: ", groupWaitCount);
                 getProcessData()->setGroupId(groupId);
-//                getProcessData()->addProcessToGroup(groupId, getProcessData()->getProcessId());
-
                 requestResource(ResourceType::GROUP,
-                                getProcessData()->getSettings().processCount - groupFreeSlots,
+                                groupWaitCount,
                                 getProcessData()->getGroupId());
 
                 getProcessData()->setProcessState(ProcessState::IN_GROUP);
@@ -39,8 +47,6 @@ void MainThread::Start() {
             case IN_GROUP:
                 if (Functions::makeDecision(30)) {
                     LOG("Leaving group");
-//                    getProcessData()->removeProcessFromGroup(getProcessData()->getGroupId(),
-//                                                             getProcessData()->getProcessId());
                     releaseResource(ResourceType::GROUP);
                     LOG("Releasing UNR");
                     releaseResource(ResourceType::UNR);
@@ -59,11 +65,10 @@ void MainThread::Start() {
 }
 
 void MainThread::requestResource(ResourceType resourceType, int responseCount, int groupId) {
-    if (responseCount <= 0) {
-        return;
+    if (responseCount > 0) {
+        getProcessData()->getWaitResourceMutex().lock();
+        getProcessData()->setAckCount(responseCount);
     }
-    getProcessData()->getWaitResourceMutex().lock();
-    getProcessData()->setAckCount(responseCount);
 
     Message message{getProcessData()->getProcessId(),
                     getProcessData()->incrementClock(),
@@ -74,7 +79,9 @@ void MainThread::requestResource(ResourceType resourceType, int responseCount, i
     LOG("Sending request messages: ", message, ", waiting for: ", responseCount, " ACK");
     sendToAll(message);
 
-    std::lock_guard _{getProcessData()->getWaitResourceMutex()};
+    if (responseCount > 0) {
+        std::lock_guard _{getProcessData()->getWaitResourceMutex()};
+    }
 }
 
 void MainThread::releaseResource(ResourceType resourceType) {
