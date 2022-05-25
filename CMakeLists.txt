@@ -11,9 +11,9 @@ add_executable(app src/main.cpp src/threads/CommunicationThread.cpp src/threads/
 
 # OpenMP
 find_package(OpenMP)
-if(OpenMP_CXX_FOUND)
+if (OpenMP_CXX_FOUND)
     target_link_libraries(app PUBLIC OpenMP::OpenMP_CXX)
-endif()
+endif ()
 
 # MPI
 find_package(MPI REQUIRED)

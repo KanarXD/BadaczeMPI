@@ -3,7 +3,7 @@
 
 ProcessData::ProcessData(int processId, int groupSize, const Settings &settings) :
         processId(processId),
-        groupList(std::vector<std::list<int>>(groupSize)),
+        groupList(std::vector<std::set<int>>(groupSize)),
         settings(settings) {
 }
 
@@ -29,13 +29,13 @@ void ProcessData::setClock(int newClock) {
 
 void ProcessData::addProcessToGroup(int group, int process) {
     std::lock_guard _{groupListMutex};
-    groupList[group].push_back(process);
+    groupList[group].insert(process);
 }
 
 void ProcessData::removeProcessFromGroup(int group, int process) {
     std::lock_guard _{groupListMutex};
     LOG("removeProcessFromGroup process: ", process, ", group: ", group);
-    groupList[group].remove(process);
+    groupList[group].erase(process);
 }
 
 int ProcessData::getProcessCountInGroup(int group) {

@@ -3,7 +3,7 @@
 #include <mutex>
 #include <atomic>
 #include <vector>
-#include <list>
+#include <set>
 #include "Settings.h"
 #include "../enums/ProcessState.h"
 
@@ -14,7 +14,7 @@ private:
     std::mutex waitResourceMutex;
     int clock = 0;
     int processId;
-    std::vector<std::list<int>> groupList;
+    std::vector<std::set<int>> groupList;
     const Settings settings;
     ProcessState processState = ProcessState::SLEEPING;
     std::atomic<int> ackCount{0};

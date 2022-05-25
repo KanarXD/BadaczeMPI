@@ -30,11 +30,11 @@ void MainThread::Start() {
             }
                 break;
             case REQUESTING_GROUP: {
-                int groupId = rand() % getProcessData()->getSettings().GroupCount;
+                int groupId = (int) (Functions::getRandomNumber() % getProcessData()->getSettings().GroupCount);
                 int groupFreeSlots =
                         getProcessData()->getSettings().groupSize - getProcessData()->getProcessCountInGroup(groupId);
                 int groupWaitCount = getProcessData()->getSettings().processCount - groupFreeSlots;
-                LOG("Requesting GROUP, count: ", groupWaitCount);
+                LOG("Requesting GROUP");
                 getProcessData()->setGroupId(groupId);
                 requestResource(ResourceType::GROUP,
                                 groupWaitCount,
