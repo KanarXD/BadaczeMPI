@@ -41,12 +41,15 @@ void CommunicationThread::HandleCommunication() {
 }
 
 void CommunicationThread::handleRequest(const Message &message) {
+    if (message.resourceType == GROUP) {
+        getProcessData()->addProcessToGroup(message.groupId, message.processId);
+    }
     if (
             getProcessData()->getProcessState() == SLEEPING ||
-            message.processId == getProcessData()->getProcessId() ||
             message.clock < getProcessData()->getClock() ||
-            (message.clock == getProcessData()->getClock() || message.processId < getProcessData()->getProcessId())
+            (message.clock == getProcessData()->getClock() && message.processId < getProcessData()->getProcessId())
             ) {
+
         sendAck(message);
     } else if (
             (getProcessData()->getProcessState() == REQUESTING_UNR && message.resourceType == GROUP)
@@ -54,23 +57,7 @@ void CommunicationThread::handleRequest(const Message &message) {
             (getProcessData()->getProcessState() == IN_GROUP && message.resourceType == GROUP &&
              message.groupId != getProcessData()->getGroupId())
             ) {
-        getProcessData()->addProcessToGroup(message.groupId, message.processId);
         sendAck(message);
-    } else {
-        addToWaitingList(message);
-    }
-}
-
-void CommunicationThread::addToWaitingList(const Message &message) {
-    switch (message.resourceType) {
-        case UNR:
-            unrWaitingList.push_back(message.processId);
-            break;
-        case GROUP:
-            groupWaitingList.push_back(message.processId);
-            break;
-        case NONE:
-            break;
     }
 }
 

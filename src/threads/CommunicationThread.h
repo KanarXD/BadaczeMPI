@@ -9,8 +9,6 @@
 class CommunicationThread : public BaseThread {
 private:
     std::thread communicationThread;
-    std::vector<int> unrWaitingList;
-    std::vector<int> groupWaitingList;
 public:
     explicit CommunicationThread(std::shared_ptr<ProcessData> &processData);
 

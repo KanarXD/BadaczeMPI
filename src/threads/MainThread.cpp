@@ -22,14 +22,14 @@ void MainThread::Start() {
                 break;
             case REQUESTING_GROUP: {
                 int groupId = rand() % getProcessData()->getSettings().GroupCount;
-                int groupSize =
+                int groupFreeSlots =
                         getProcessData()->getSettings().GroupCount - getProcessData()->getProcessCountInGroup(groupId);
 
                 getProcessData()->setGroupId(groupId);
 //                getProcessData()->addProcessToGroup(groupId, getProcessData()->getProcessId());
 
                 requestResource(ResourceType::GROUP,
-                                getProcessData()->getSettings().processCount - groupSize,
+                                getProcessData()->getSettings().processCount - groupFreeSlots,
                                 getProcessData()->getGroupId());
 
                 getProcessData()->setProcessState(ProcessState::IN_GROUP);
