@@ -43,6 +43,11 @@ int ProcessData::getProcessCountInGroup(int group) {
     return (int) groupList[group].size();
 }
 
+std::set<int> ProcessData::getProcessSetFromGroup(int group) {
+    std::lock_guard _{groupListMutex};
+    return groupList[group];
+}
+
 const Settings &ProcessData::getSettings() const {
     return settings;
 }

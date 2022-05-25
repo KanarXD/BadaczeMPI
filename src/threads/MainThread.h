@@ -17,5 +17,7 @@ private:
     void releaseResource(ResourceType type);
 
     void sendToAll(const Message &message) const;
+
+    void groupListToString() const;
 };
 

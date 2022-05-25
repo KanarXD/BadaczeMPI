@@ -36,6 +36,8 @@ public:
 
     void removeProcessFromGroup(int group, int process);
 
+    std::set<int> getProcessSetFromGroup(int group);
+
     [[nodiscard]] int getProcessCountInGroup(int group);
 
     [[nodiscard]] ProcessState getProcessState() const;

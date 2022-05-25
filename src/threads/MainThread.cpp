@@ -12,13 +12,7 @@ void MainThread::Start() {
     setRunning(true);
     communicationThread.Start();
     while (isRunning()) {
-        std::stringstream groupList;
-        groupList << "groups: ";
-        for (int i = 0; i < getProcessData()->getSettings().GroupCount; ++i) {
-            int groupSize = getProcessData()->getProcessCountInGroup(i);
-            groupList << i << ": " << groupSize << ", ";
-        }
-        LOGSTATE(groupList.str().c_str());
+        groupListToString();
         switch (getProcessData()->getProcessState()) {
             case REQUESTING_UNR: {
                 int unrCount = getProcessData()->getSettings().processCount -
@@ -31,9 +25,9 @@ void MainThread::Start() {
                 break;
             case REQUESTING_GROUP: {
                 int groupId = (int) (Functions::getRandomNumber() % getProcessData()->getSettings().GroupCount);
-                int groupFreeSlots =
-                        getProcessData()->getSettings().groupSize - getProcessData()->getProcessCountInGroup(groupId);
-                int groupWaitCount = getProcessData()->getSettings().processCount - groupFreeSlots;
+                getProcessData()->addProcessToGroup(groupId, getProcessData()->getProcessId());
+                int groupWaitCount =
+                        getProcessData()->getSettings().processCount - getProcessData()->getSettings().groupSize;
                 LOG("Requesting GROUP");
                 getProcessData()->setGroupId(groupId);
                 requestResource(ResourceType::GROUP,
@@ -47,6 +41,8 @@ void MainThread::Start() {
             case IN_GROUP:
                 if (Functions::makeDecision(30)) {
                     LOG("Leaving group");
+                    getProcessData()->removeProcessFromGroup(getProcessData()->getGroupId(),
+                                                             getProcessData()->getProcessId());
                     releaseResource(ResourceType::GROUP);
                     LOG("Releasing UNR");
                     releaseResource(ResourceType::UNR);
@@ -62,6 +58,24 @@ void MainThread::Start() {
         Functions::sleep();
     }
     communicationThread.Stop();
+}
+
+void MainThread::groupListToString() const {
+    std::stringstream groupListString;
+    groupListString << "groups: ";
+    for (int i = 0; i < getProcessData()->getSettings().GroupCount; ++i) {
+        int groupSize = getProcessData()->getProcessCountInGroup(i);
+        groupListString << "g: " << i << "s: ";
+        if (groupSize > 0) {
+            groupListString << groupSize << " (";
+            std::set<int> groupSet = getProcessData()->getProcessSetFromGroup(i);
+            for (int process: groupSet) {
+                groupListString << process << ", ";
+            }
+            groupListString << "), ";
+        }
+    }
+    LOGSTATE(groupListString.str().c_str());
 }
 
 void MainThread::requestResource(ResourceType resourceType, int responseCount, int groupId) {

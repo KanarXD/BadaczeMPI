@@ -20,8 +20,9 @@ void CommunicationThread::HandleCommunication() {
         Message message{};
         MPI_Status status;
         MPI_Recv(&message, sizeof(Message), MPI_BYTE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
-
+        getProcessData()->setClock(message.clock);
         LOG("Received message: ", message);
+
         switch (message.messageType) {
             case REQUEST:
                 handleRequest(message);
@@ -35,8 +36,6 @@ void CommunicationThread::HandleCommunication() {
             case END:
                 break;
         }
-        getProcessData()->setClock(message.clock);
-
     }
 }
 
@@ -46,13 +45,12 @@ void CommunicationThread::handleRequest(const Message &message) {
         getProcessData()->addProcessToGroup(message.groupId, message.processId);
     }
     if (
-            getProcessData()->getProcessState() == SLEEPING ||
-            message.clock < getProcessData()->getClock() ||
+            getProcessData()->getProcessState() == SLEEPING
+            ||
+            message.clock < getProcessData()->getClock()
+            ||
             (message.clock == getProcessData()->getClock() && message.processId < getProcessData()->getProcessId())
-            ) {
-
-        sendAck(message);
-    } else if (
+            ||
             (getProcessData()->getProcessState() == REQUESTING_UNR && message.resourceType == GROUP)
             ||
             (getProcessData()->getProcessState() == IN_GROUP && message.resourceType == GROUP &&
@@ -101,7 +99,6 @@ void CommunicationThread::releaseMainThread() const {
 void CommunicationThread::handleRelease(Message incomingMessage) {
     if (incomingMessage.resourceType == GROUP) {
         LOG("handleRelease, Sending ACK to id: ", incomingMessage.processId);
-        LOG("removing process: ", incomingMessage.processId, " from group: ", incomingMessage.groupId);
         getProcessData()->removeProcessFromGroup(incomingMessage.groupId, incomingMessage.processId);
         Message outgoingMessage{getProcessData()->getProcessId(),
                                 getProcessData()->incrementClock(),
