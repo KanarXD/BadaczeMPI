@@ -18,9 +18,9 @@ private:
     const Settings settings;
     ProcessState processState = ProcessState::SLEEPING;
     std::atomic<int> ackCount{0};
-    int groupId;
+    int groupId = 0;
 public:
-    ProcessData(int processId, int groupSize, const Settings &settings);
+    ProcessData(int processId, const Settings &settings);
 
     [[nodiscard]] int getClock() const;
 

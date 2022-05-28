@@ -28,7 +28,7 @@ int main(int argCount, char **args) {
     LOGINFO("Settings: ", settings);
 
     std::shared_ptr<ProcessData> processData =
-            std::make_shared<ProcessData>(processId, settings.groupSize, settings);
+            std::make_shared<ProcessData>(processId, settings);
 
     Log::setProcessData(processData);
 

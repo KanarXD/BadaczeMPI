@@ -1,9 +1,9 @@
 #include "ProcessData.h"
 #include "../utility/Log.h"
 
-ProcessData::ProcessData(int processId, int groupSize, const Settings &settings) :
+ProcessData::ProcessData(int processId, const Settings &settings) :
         processId(processId),
-        groupList(std::vector<std::set<int>>(groupSize)),
+        groupList(std::vector<std::set<int>>(settings.GroupCount)),
         settings(settings) {
 }
 
