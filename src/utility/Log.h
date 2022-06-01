@@ -6,6 +6,7 @@
 #include "../models/ProcessData.h"
 
 #define LOG(...)               Log::LogColored(__VA_ARGS__)
+#define LOGDEBUG(...)          //Log::LogColored(__VA_ARGS__)
 #define LOGINFO(...)           Log::LogInfo(__VA_ARGS__)
 #define LOGSTATE(...)          Log::LogColored(__VA_ARGS__)
 

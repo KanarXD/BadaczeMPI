@@ -18,7 +18,7 @@ private:
     const Settings settings;
     ProcessState processState = ProcessState::SLEEPING;
     std::atomic<int> ackCount{0};
-    int groupId = 0;
+    int groupId = -1;
 public:
     ProcessData(int processId, const Settings &settings);
 

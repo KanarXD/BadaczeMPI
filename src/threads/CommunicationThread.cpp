@@ -41,19 +41,25 @@ void CommunicationThread::HandleCommunication() {
 
 void CommunicationThread::handleRequest(const Message &message) {
     if (message.resourceType == GROUP) {
-        LOG("added process: ", message.processId, " to group: ", message.groupId);
+        LOGDEBUG("added process: ", message.processId, " to group: ", message.groupId);
         getProcessData()->addProcessToGroup(message.groupId, message.processId);
     }
     if (
             getProcessData()->getProcessState() == SLEEPING
             ||
-            message.clock < getProcessData()->getClock()
-            ||
-            (message.clock == getProcessData()->getClock() && message.processId < getProcessData()->getProcessId())
+            ((getProcessData()->getProcessState() == REQUESTING_UNR ||
+              getProcessData()->getProcessState() == REQUESTING_GROUP)
+             &&
+             (message.clock < getProcessData()->getClock()
+              ||
+              (message.clock == getProcessData()->getClock() && message.processId < getProcessData()->getProcessId())))
             ||
             (getProcessData()->getProcessState() == REQUESTING_UNR && message.resourceType == GROUP)
             ||
-            (getProcessData()->getProcessState() == IN_GROUP && message.resourceType == GROUP &&
+            (getProcessData()->getProcessState() == IN_GROUP
+             &&
+             message.resourceType == GROUP
+             &&
              message.groupId != getProcessData()->getGroupId())
             ) {
         sendAck(message);
@@ -61,17 +67,17 @@ void CommunicationThread::handleRequest(const Message &message) {
 }
 
 void CommunicationThread::sendAck(const Message &incomingMessage) {
-    LOG("sendAck, Sending ACK to: ", incomingMessage.processId);
     Message outgoingMessage{getProcessData()->getProcessId(),
                             getProcessData()->incrementClock(),
                             MessageType::ACK,
                             incomingMessage.resourceType};
+    LOG("Sending ack message: ", outgoingMessage);
 
     MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
 }
 
 void CommunicationThread::handleAck(const Message &message) {
-    LOG("handleAck, ack: ", getProcessData()->getAckCount());
+    LOGDEBUG("handleAck, ack: ", getProcessData()->getAckCount());
     if (
             (message.resourceType == ResourceType::UNR &&
              getProcessData()->getProcessState() == ProcessState::REQUESTING_UNR)
@@ -85,7 +91,7 @@ void CommunicationThread::handleAck(const Message &message) {
 }
 
 void CommunicationThread::releaseMainThread() const {
-    LOG("releaseMainThread, ack: ", getProcessData()->getAckCount());
+    LOGDEBUG("releaseMainThread, ack: ", getProcessData()->getAckCount());
     if (getProcessData()->getAckCount() <= 0) {
         return;
     }
@@ -93,17 +99,19 @@ void CommunicationThread::releaseMainThread() const {
     if (getProcessData()->getAckCount() == 0) {
         getProcessData()->getWaitResourceMutex().unlock();
     }
-    LOG("releaseMainThread end, ack: ", getProcessData()->getAckCount());
+    LOGDEBUG("releaseMainThread end, ack: ", getProcessData()->getAckCount());
 }
 
 void CommunicationThread::handleRelease(Message incomingMessage) {
     if (incomingMessage.resourceType == GROUP) {
-        LOG("handleRelease, Sending ACK to id: ", incomingMessage.processId);
+        LOGDEBUG("handleRelease, Sending ACK to id: ", incomingMessage.processId);
         getProcessData()->removeProcessFromGroup(incomingMessage.groupId, incomingMessage.processId);
         Message outgoingMessage{getProcessData()->getProcessId(),
                                 getProcessData()->incrementClock(),
                                 MessageType::ACK,
-                                incomingMessage.resourceType};
+                                incomingMessage.resourceType,
+                                incomingMessage.groupId};
+        LOG("Sending release ACK: ", outgoingMessage);
         MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
     } else if (incomingMessage.resourceType == UNR) {
         handleAck(incomingMessage);

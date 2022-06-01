@@ -17,10 +17,10 @@ void MainThread::Start() {
             case REQUESTING_UNR: {
                 int unrCount = getProcessData()->getSettings().processCount -
                                getProcessData()->getSettings().UNRCount;
-                LOG("Requesting UNR, count: ", unrCount);
+                LOGDEBUG("Requesting UNR, count: ", unrCount);
                 requestResource(ResourceType::UNR, unrCount, 0);
                 getProcessData()->setProcessState(ProcessState::REQUESTING_GROUP);
-                LOG("Requesting GROUP");
+                LOGDEBUG("Requesting GROUP");
             }
                 break;
             case REQUESTING_GROUP: {
@@ -28,24 +28,24 @@ void MainThread::Start() {
                 getProcessData()->addProcessToGroup(groupId, getProcessData()->getProcessId());
                 int groupWaitCount =
                         getProcessData()->getSettings().processCount - getProcessData()->getSettings().groupSize;
-                LOG("Requesting GROUP");
+                LOGDEBUG("Requesting GROUP");
                 getProcessData()->setGroupId(groupId);
                 requestResource(ResourceType::GROUP,
                                 groupWaitCount,
                                 getProcessData()->getGroupId());
 
                 getProcessData()->setProcessState(ProcessState::IN_GROUP);
-                LOG("In GROUP");
+                LOGDEBUG("In GROUP");
             }
                 break;
             case IN_GROUP:
                 if (Functions::makeDecision(30)) {
-                    LOG("Leaving group");
+                    LOGDEBUG("Leaving group");
                     getProcessData()->removeProcessFromGroup(getProcessData()->getGroupId(),
                                                              getProcessData()->getProcessId());
-                    releaseResource(ResourceType::GROUP);
-                    LOG("Releasing UNR");
-                    releaseResource(ResourceType::UNR);
+                    releaseResource(ResourceType::GROUP, getProcessData()->getGroupId());
+                    LOGDEBUG("Releasing UNR");
+                    releaseResource(ResourceType::UNR, -1);
                     getProcessData()->setProcessState(ProcessState::SLEEPING);
                 }
                 break;
@@ -98,7 +98,7 @@ void MainThread::requestResource(ResourceType resourceType, int responseCount, i
     }
 }
 
-void MainThread::releaseResource(ResourceType resourceType) {
+void MainThread::releaseResource(ResourceType resourceType, int groupId) {
     if (resourceType == GROUP && getProcessData()->getSettings().processCount > 1) {
         getProcessData()->getWaitResourceMutex().lock();
         getProcessData()->setAckCount(getProcessData()->getSettings().processCount - 1);
@@ -107,7 +107,8 @@ void MainThread::releaseResource(ResourceType resourceType) {
     Message message{getProcessData()->getProcessId(),
                     getProcessData()->incrementClock(),
                     MessageType::RELEASE,
-                    resourceType};
+                    resourceType,
+                    groupId};
 
     LOG("Sending release messages: ", message);
 

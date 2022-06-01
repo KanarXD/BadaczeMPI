@@ -14,7 +14,7 @@ public:
 private:
     void requestResource(ResourceType resourceType, int responseCount, int i);
 
-    void releaseResource(ResourceType type);
+    void releaseResource(ResourceType type, int groupId);
 
     void sendToAll(const Message &message) const;
 
