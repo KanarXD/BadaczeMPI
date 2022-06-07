@@ -2,6 +2,7 @@
 
 
 enum MessageType : unsigned short {
+    GROUP_TALK = 4,
     ACK = 3,
     RELEASE = 2,
     REQUEST = 1,

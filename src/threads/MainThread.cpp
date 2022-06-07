@@ -11,6 +11,7 @@ MainThread::MainThread(std::shared_ptr<ProcessData> &processData) : BaseThread(p
 void MainThread::Start() {
     setRunning(true);
     communicationThread.Start();
+    int sentMessagesInGroupCounter;
     while (isRunning()) {
         groupListToString();
         switch (getProcessData()->getProcessState()) {
@@ -18,7 +19,7 @@ void MainThread::Start() {
                 int unrCount = getProcessData()->getSettings().processCount -
                                getProcessData()->getSettings().UNRCount;
                 LOGDEBUG("Requesting UNR, count: ", unrCount);
-                requestResource(ResourceType::UNR, unrCount, 0);
+                requestResource(ResourceType::UNR, unrCount);
                 getProcessData()->setProcessState(ProcessState::REQUESTING_GROUP);
                 LOGDEBUG("Requesting GROUP");
             }
@@ -30,23 +31,26 @@ void MainThread::Start() {
                         getProcessData()->getSettings().processCount - getProcessData()->getSettings().groupSize;
                 LOGDEBUG("Requesting GROUP");
                 getProcessData()->setGroupId(groupId);
+                sentMessagesInGroupCounter = 0;
+                getProcessData()->setCurrentGroup(getProcessData()->getProcessSetFromGroup(groupId));
                 requestResource(ResourceType::GROUP,
-                                groupWaitCount,
-                                getProcessData()->getGroupId());
-
+                                groupWaitCount);
                 getProcessData()->setProcessState(ProcessState::IN_GROUP);
                 LOGDEBUG("In GROUP");
             }
                 break;
             case IN_GROUP:
-                if (Functions::makeDecision(30)) {
+                if (sentMessagesInGroupCounter > 0 && Functions::makeDecision(30)) {
                     LOGDEBUG("Leaving group");
                     getProcessData()->removeProcessFromGroup(getProcessData()->getGroupId(),
                                                              getProcessData()->getProcessId());
-                    releaseResource(ResourceType::GROUP, getProcessData()->getGroupId());
+                    releaseResource(ResourceType::GROUP);
                     LOGDEBUG("Releasing UNR");
-                    releaseResource(ResourceType::UNR, -1);
+                    getProcessData()->setGroupId(-1);
+                    releaseResource(ResourceType::UNR);
                     getProcessData()->setProcessState(ProcessState::SLEEPING);
+                } else {
+                    sendMessageInGroup(sentMessagesInGroupCounter);
                 }
                 break;
             case SLEEPING:
@@ -60,25 +64,7 @@ void MainThread::Start() {
     communicationThread.Stop();
 }
 
-void MainThread::groupListToString() const {
-    std::stringstream groupListString;
-    groupListString << "groups: ";
-    for (int i = 0; i < getProcessData()->getSettings().GroupCount; ++i) {
-        int groupSize = getProcessData()->getProcessCountInGroup(i);
-        groupListString << "g: " << i << "s: ";
-        if (groupSize > 0) {
-            groupListString << groupSize << " (";
-            std::set<int> groupSet = getProcessData()->getProcessSetFromGroup(i);
-            for (int process: groupSet) {
-                groupListString << process << ", ";
-            }
-            groupListString << "), ";
-        }
-    }
-    LOGSTATE(groupListString.str().c_str());
-}
-
-void MainThread::requestResource(ResourceType resourceType, int responseCount, int groupId) {
+void MainThread::requestResource(ResourceType resourceType, int responseCount) {
     if (responseCount > 0) {
         getProcessData()->getWaitResourceMutex().lock();
         getProcessData()->setAckCount(responseCount);
@@ -88,7 +74,7 @@ void MainThread::requestResource(ResourceType resourceType, int responseCount, i
                     getProcessData()->incrementClock(),
                     MessageType::REQUEST,
                     resourceType,
-                    groupId};
+                    getProcessData()->getGroupId()};
 
     LOG("Sending request messages: ", message, ", waiting for: ", responseCount, " ACK");
     sendToAll(message);
@@ -98,7 +84,7 @@ void MainThread::requestResource(ResourceType resourceType, int responseCount, i
     }
 }
 
-void MainThread::releaseResource(ResourceType resourceType, int groupId) {
+void MainThread::releaseResource(ResourceType resourceType) {
     if (resourceType == GROUP && getProcessData()->getSettings().processCount > 1) {
         getProcessData()->getWaitResourceMutex().lock();
         getProcessData()->setAckCount(getProcessData()->getSettings().processCount - 1);
@@ -108,7 +94,7 @@ void MainThread::releaseResource(ResourceType resourceType, int groupId) {
                     getProcessData()->incrementClock(),
                     MessageType::RELEASE,
                     resourceType,
-                    groupId};
+                    getProcessData()->getGroupId()};
 
     LOG("Sending release messages: ", message);
 
@@ -128,5 +114,52 @@ void MainThread::sendToAll(const Message &message) const {
 }
 
 
+void MainThread::sendMessageInGroup(int &messageCounter) {
+    Message message{getProcessData()->getProcessId(),
+                    getProcessData()->incrementClock(),
+                    MessageType::GROUP_TALK,
+                    ResourceType::NONE,
+                    getProcessData()->getGroupId()};
 
+    std::set<int> currentGroup = getProcessData()->getCurrentGroup();
+    groupToString(currentGroup);
+    for (int processId: currentGroup) {
+        if (processId != getProcessData()->getProcessId()) {
+            LOG("Sending group talk messages: ", message, " to: ", processId);
+            MPI_Send(&message, sizeof(Message), MPI_BYTE, processId, 0, MPI_COMM_WORLD);
+            messageCounter++;
+        }
+    }
+}
+
+void MainThread::groupListToString() const {
+    std::stringstream groupListString;
+    groupListString << "groups: ";
+    for (int i = 0; i < getProcessData()->getSettings().GroupCount; ++i) {
+        int groupSize = getProcessData()->getProcessCountInGroup(i);
+        groupListString << "g: " << i;
+        if (groupSize > 0) {
+            groupListString << " (";
+            std::set<int> groupSet = getProcessData()->getProcessSetFromGroup(i);
+            for (int process: groupSet) {
+                groupListString << process << ", ";
+            }
+            groupListString << "), ";
+        }
+    }
+    LOGSTATE(groupListString.str().c_str());
+}
+
+void MainThread::groupToString(std::set<int> group) const {
+    std::stringstream groupListString;
+    groupListString << " g: ";
+    if (!group.empty()) {
+        groupListString << " (";
+        for (int process: group) {
+            groupListString << process << ", ";
+        }
+        groupListString << "), ";
+    }
+    LOGSTATE("Current group: ", getProcessData()->getGroupId(), groupListString.str().c_str());
+}
 

@@ -79,3 +79,18 @@ int ProcessData::getGroupId() const {
 void ProcessData::setGroupId(int groupId) {
     ProcessData::groupId = groupId;
 }
+
+void ProcessData::setCurrentGroup(std::set<int> group) {
+    std::lock_guard _{currentGroupMutex};
+    this->currentGroup = group;
+}
+
+std::set<int> &ProcessData::getCurrentGroup() {
+    std::lock_guard _{currentGroupMutex};
+    return currentGroup;
+}
+
+void ProcessData::removeProcessFromCurrentGroup(int processId) {
+    std::lock_guard _{currentGroupMutex};
+    currentGroup.erase(processId);
+}

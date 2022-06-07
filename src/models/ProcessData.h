@@ -12,6 +12,7 @@ private:
     std::mutex clockMutex;
     std::mutex groupListMutex;
     std::mutex waitResourceMutex;
+    std::mutex currentGroupMutex;
     int clock = 0;
     int processId;
     std::vector<std::set<int>> groupList;
@@ -19,6 +20,7 @@ private:
     ProcessState processState = ProcessState::SLEEPING;
     std::atomic<int> ackCount{0};
     int groupId = -1;
+    std::set<int> currentGroup;
 public:
     ProcessData(int processId, const Settings &settings);
 
@@ -53,6 +55,12 @@ public:
     [[nodiscard]] int getGroupId() const;
 
     void setGroupId(int groupId);
+
+    void setCurrentGroup(std::set<int> group);
+
+    std::set<int> &getCurrentGroup();
+
+    void removeProcessFromCurrentGroup(int processId);
 
 };
 

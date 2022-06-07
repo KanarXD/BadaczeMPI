@@ -39,6 +39,8 @@ struct Message {
                 return "RELEASE";
             case ACK:
                 return "ACK";
+            case GROUP_TALK:
+                return "GROUP_TALK";
         }
     }
 };

@@ -23,12 +23,12 @@ private:
 
     void sendAck(const Message &incomingMessage);
 
-    void addToWaitingList(const Message &message);
-
     void handleAck(const Message &message);
 
     void handleRelease(Message incomingMessage);
 
     void releaseMainThread() const;
+
+    void handleGroupTalk(Message message);
 };
 

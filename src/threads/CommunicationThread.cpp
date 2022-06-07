@@ -33,6 +33,9 @@ void CommunicationThread::HandleCommunication() {
             case RELEASE:
                 handleRelease(message);
                 break;
+            case GROUP_TALK:
+                handleGroupTalk(message);
+                break;
             case END:
                 break;
         }
@@ -105,6 +108,7 @@ void CommunicationThread::releaseMainThread() const {
 void CommunicationThread::handleRelease(Message incomingMessage) {
     if (incomingMessage.resourceType == GROUP) {
         LOGDEBUG("handleRelease, Sending ACK to id: ", incomingMessage.processId);
+        getProcessData()->removeProcessFromCurrentGroup(incomingMessage.processId);
         getProcessData()->removeProcessFromGroup(incomingMessage.groupId, incomingMessage.processId);
         Message outgoingMessage{getProcessData()->getProcessId(),
                                 getProcessData()->incrementClock(),
@@ -116,6 +120,12 @@ void CommunicationThread::handleRelease(Message incomingMessage) {
     } else if (incomingMessage.resourceType == UNR) {
         handleAck(incomingMessage);
     }
+}
+
+void CommunicationThread::handleGroupTalk(Message message) {
+    LOG("Handling group talk: ", message);
+    getProcessData()->getCurrentGroup().insert(message.processId);
+
 }
 
 

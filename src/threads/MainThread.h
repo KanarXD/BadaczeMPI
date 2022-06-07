@@ -12,12 +12,16 @@ public:
     void Start() override;
 
 private:
-    void requestResource(ResourceType resourceType, int responseCount, int i);
+    void requestResource(ResourceType resourceType, int responseCount);
 
-    void releaseResource(ResourceType type, int groupId);
+    void releaseResource(ResourceType type);
 
     void sendToAll(const Message &message) const;
 
+    void sendMessageInGroup(int &messageCounter);
+
     void groupListToString() const;
+
+    void groupToString(std::set<int> group) const;
 };
 
