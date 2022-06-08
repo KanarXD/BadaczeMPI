@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/main.cpp
+mpi.h
+-
+stdio.h
+-
+stdlib.h
+-
+stddef.h
+-
+unistd.h
+-
+string.h
+-
+pthread.h
+-
+

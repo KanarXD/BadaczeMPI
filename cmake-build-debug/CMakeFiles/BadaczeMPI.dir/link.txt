@@ -1,0 +1,1 @@
+/usr/bin/c++   -Werror -Wall -Wextra -Wpedantic -pthread -std=c++2a -g   CMakeFiles/BadaczeMPI.dir/src/main.cpp.o  -o BadaczeMPI 
