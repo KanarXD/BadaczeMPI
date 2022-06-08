@@ -12,16 +12,6 @@
 
 /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/ResourceType.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/main.cpp
-mpi.h
--
-threads/MainThread.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.h
-utility/Log.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.h
-models/Settings.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/Settings.h
-
 /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/Message.h
 ostream
 -
@@ -29,12 +19,6 @@ ostream
 /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/MessageType.h
 ../enums/ResourceType.h
 /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/ResourceType.h
-
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.cpp
-ProcessData.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.h
-../utility/Log.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.h
 
 /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.h
 mutex
@@ -82,10 +66,6 @@ utility/Log.h
 utility/Functions.h
 /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Functions.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.cpp
-BaseThread.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.h
-
 /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.h
 ../models/ProcessData.h
 /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.h
@@ -127,10 +107,6 @@ thread
 -
 random
 -
-
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.cpp
-Log.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.h
 
 /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.h
 iostream
