@@ -6,21 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/MessageType.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/enums/MessageType.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/ProcessState.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/enums/ProcessState.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/ResourceType.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/enums/ResourceType.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/Message.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/Message.h
 ostream
 -
 ../enums/MessageType.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/MessageType.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/enums/MessageType.h
 ../enums/ResourceType.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/ResourceType.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/enums/ResourceType.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.h
 mutex
 -
 atomic
@@ -30,15 +30,15 @@ vector
 set
 -
 Settings.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/Settings.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/Settings.h
 ../enums/ProcessState.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/ProcessState.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/enums/ProcessState.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/Settings.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/Settings.h
 ostream
 -
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/pch.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/pch.h
 mpi.h
 -
 ostream
@@ -62,53 +62,41 @@ atomic
 random
 -
 utility/Log.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Log.h
 utility/Functions.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Functions.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Functions.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/BaseThread.h
 ../models/ProcessData.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.h
 atomic
 -
 thread
 -
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.cpp
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/CommunicationThread.cpp
 CommunicationThread.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/CommunicationThread.h
 ../pch.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/pch.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/pch.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/CommunicationThread.h
 thread
 -
 BaseThread.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/BaseThread.h
 ../models/ProcessData.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.h
 ../models/Message.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/Message.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/Message.h
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.cpp
-MainThread.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.h
-../pch.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/pch.h
-
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.h
-CommunicationThread.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.h
-BaseThread.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.h
-
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Functions.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Functions.h
 thread
 -
 random
 -
 
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Log.h
 iostream
 -
 sstream
@@ -116,7 +104,7 @@ sstream
 memory
 -
 ../models/ProcessData.h
-/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.h
+/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.h
 
 /usr/include/x86_64-linux-gnu/mpich/mpi.h
 stddef.h

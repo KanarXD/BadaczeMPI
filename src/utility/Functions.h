@@ -9,10 +9,9 @@
 namespace Functions {
 
     static unsigned long getRandomNumber() {
-//        long time = duration_cast<std::chrono::nanoseconds>(
-//                std::chrono::system_clock::now().time_since_epoch()).count();
-//        std::mt19937 rng(time);
-        return rand();
+        long time = std::chrono::system_clock::now().time_since_epoch() / std::chrono::milliseconds(1);
+        std::mt19937 rng(time);
+        return rng();
     }
 
     static void sleep() {

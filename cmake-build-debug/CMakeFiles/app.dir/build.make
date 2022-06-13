@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/picio/CLionProjects/BadaczeMPI
+CMAKE_SOURCE_DIR = /mnt/f/Szkoła/PRoz/BadaczeMPI
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug
+CMAKE_BINARY_DIR = /mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/app.dir/depend.make
@@ -59,81 +59,81 @@ include CMakeFiles/app.dir/flags.make
 
 CMakeFiles/app.dir/src/main.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/main.cpp.o -c /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/main.cpp.o -c /mnt/f/Szkoła/PRoz/BadaczeMPI/src/main.cpp
 
 CMakeFiles/app.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/main.cpp > CMakeFiles/app.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/f/Szkoła/PRoz/BadaczeMPI/src/main.cpp > CMakeFiles/app.dir/src/main.cpp.i
 
 CMakeFiles/app.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/main.cpp -o CMakeFiles/app.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/f/Szkoła/PRoz/BadaczeMPI/src/main.cpp -o CMakeFiles/app.dir/src/main.cpp.s
 
 CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.o: ../src/threads/CommunicationThread.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.o -c /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.o -c /mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/CommunicationThread.cpp
 
 CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.cpp > CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/CommunicationThread.cpp > CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.i
 
 CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.cpp -o CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/CommunicationThread.cpp -o CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.s
 
 CMakeFiles/app.dir/src/threads/MainThread.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/threads/MainThread.cpp.o: ../src/threads/MainThread.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app.dir/src/threads/MainThread.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/threads/MainThread.cpp.o -c /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app.dir/src/threads/MainThread.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/threads/MainThread.cpp.o -c /mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/MainThread.cpp
 
 CMakeFiles/app.dir/src/threads/MainThread.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/threads/MainThread.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.cpp > CMakeFiles/app.dir/src/threads/MainThread.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/MainThread.cpp > CMakeFiles/app.dir/src/threads/MainThread.cpp.i
 
 CMakeFiles/app.dir/src/threads/MainThread.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/threads/MainThread.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.cpp -o CMakeFiles/app.dir/src/threads/MainThread.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/MainThread.cpp -o CMakeFiles/app.dir/src/threads/MainThread.cpp.s
 
 CMakeFiles/app.dir/src/utility/Log.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/utility/Log.cpp.o: ../src/utility/Log.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app.dir/src/utility/Log.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/utility/Log.cpp.o -c /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app.dir/src/utility/Log.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/utility/Log.cpp.o -c /mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Log.cpp
 
 CMakeFiles/app.dir/src/utility/Log.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/utility/Log.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.cpp > CMakeFiles/app.dir/src/utility/Log.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Log.cpp > CMakeFiles/app.dir/src/utility/Log.cpp.i
 
 CMakeFiles/app.dir/src/utility/Log.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/utility/Log.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.cpp -o CMakeFiles/app.dir/src/utility/Log.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Log.cpp -o CMakeFiles/app.dir/src/utility/Log.cpp.s
 
 CMakeFiles/app.dir/src/models/ProcessData.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/models/ProcessData.cpp.o: ../src/models/ProcessData.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/app.dir/src/models/ProcessData.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/models/ProcessData.cpp.o -c /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/app.dir/src/models/ProcessData.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/models/ProcessData.cpp.o -c /mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.cpp
 
 CMakeFiles/app.dir/src/models/ProcessData.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/models/ProcessData.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.cpp > CMakeFiles/app.dir/src/models/ProcessData.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.cpp > CMakeFiles/app.dir/src/models/ProcessData.cpp.i
 
 CMakeFiles/app.dir/src/models/ProcessData.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/models/ProcessData.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.cpp -o CMakeFiles/app.dir/src/models/ProcessData.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.cpp -o CMakeFiles/app.dir/src/models/ProcessData.cpp.s
 
 CMakeFiles/app.dir/src/threads/BaseThread.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/threads/BaseThread.cpp.o: ../src/threads/BaseThread.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/app.dir/src/threads/BaseThread.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/threads/BaseThread.cpp.o -c /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/app.dir/src/threads/BaseThread.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/threads/BaseThread.cpp.o -c /mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/BaseThread.cpp
 
 CMakeFiles/app.dir/src/threads/BaseThread.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/threads/BaseThread.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.cpp > CMakeFiles/app.dir/src/threads/BaseThread.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/BaseThread.cpp > CMakeFiles/app.dir/src/threads/BaseThread.cpp.i
 
 CMakeFiles/app.dir/src/threads/BaseThread.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/threads/BaseThread.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.cpp -o CMakeFiles/app.dir/src/threads/BaseThread.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/BaseThread.cpp -o CMakeFiles/app.dir/src/threads/BaseThread.cpp.s
 
 # Object files for target app
 app_OBJECTS = \
@@ -159,7 +159,7 @@ app: /usr/lib/x86_64-linux-gnu/libpthread.so
 app: /usr/lib/x86_64-linux-gnu/libmpichcxx.so
 app: /usr/lib/x86_64-linux-gnu/libmpich.so
 app: CMakeFiles/app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -172,6 +172,6 @@ CMakeFiles/app.dir/clean:
 .PHONY : CMakeFiles/app.dir/clean
 
 CMakeFiles/app.dir/depend:
-	cd /mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/picio/CLionProjects/BadaczeMPI /mnt/c/Users/picio/CLionProjects/BadaczeMPI /mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug /mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug /mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/DependInfo.cmake --color=$(COLOR)
+	cd /mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/f/Szkoła/PRoz/BadaczeMPI /mnt/f/Szkoła/PRoz/BadaczeMPI /mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug /mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug /mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/app.dir/depend
 

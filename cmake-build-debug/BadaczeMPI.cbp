@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug"/>
+				<Option working_dir="/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug"/>
+				<Option working_dir="/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug"/>
+				<Option working_dir="/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="app">
-				<Option output="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/app" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug"/>
+				<Option output="/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/app" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -55,15 +55,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 app"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 app"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="app/fast">
-				<Option output="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/app" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug"/>
+				<Option output="/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/app" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -79,65 +79,65 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 app/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 app/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/MessageType.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/enums/MessageType.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/ProcessState.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/enums/ProcessState.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/enums/ResourceType.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/enums/ResourceType.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/main.cpp">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/main.cpp">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/Message.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/Message.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.cpp">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.cpp">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/Settings.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/Settings.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.cpp">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/BaseThread.cpp">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/BaseThread.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.cpp">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/CommunicationThread.cpp">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/CommunicationThread.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.cpp">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/MainThread.cpp">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/MainThread.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Functions.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Functions.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.cpp">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Log.cpp">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.h">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Log.h">
 			<Option target="app"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/picio/CLionProjects/BadaczeMPI/CMakeLists.txt">
+		<Unit filename="/mnt/f/Szkoła/PRoz/BadaczeMPI/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

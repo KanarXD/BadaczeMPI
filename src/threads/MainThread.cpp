@@ -20,19 +20,22 @@ void MainThread::Start() {
                                getProcessData()->getSettings().UNRCount;
                 LOGDEBUG("Requesting UNR, count: ", unrCount);
                 requestResource(ResourceType::UNR, unrCount);
+                int groupId = (int) (Functions::getRandomNumber() % getProcessData()->getSettings().GroupCount);
+
+                getProcessData()->setGroupId(groupId);
+                getProcessData()->addProcessToGroup(groupId, getProcessData()->getProcessId());
                 getProcessData()->setProcessState(ProcessState::REQUESTING_GROUP);
                 LOGDEBUG("Requesting GROUP");
             }
                 break;
             case REQUESTING_GROUP: {
-                int groupId = (int) (Functions::getRandomNumber() % getProcessData()->getSettings().GroupCount);
-                getProcessData()->addProcessToGroup(groupId, getProcessData()->getProcessId());
                 int groupWaitCount =
                         getProcessData()->getSettings().processCount - getProcessData()->getSettings().groupSize;
                 LOGDEBUG("Requesting GROUP");
-                getProcessData()->setGroupId(groupId);
+
                 sentMessagesInGroupCounter = 0;
-                getProcessData()->setCurrentGroup(getProcessData()->getProcessSetFromGroup(groupId));
+                getProcessData()->setCurrentGroup(
+                        getProcessData()->getProcessSetFromGroup(getProcessData()->getGroupId()));
                 requestResource(ResourceType::GROUP,
                                 groupWaitCount);
                 getProcessData()->setProcessState(ProcessState::IN_GROUP);
@@ -137,9 +140,9 @@ void MainThread::groupListToString() const {
     groupListString << "groups: ";
     for (int i = 0; i < getProcessData()->getSettings().GroupCount; ++i) {
         int groupSize = getProcessData()->getProcessCountInGroup(i);
-        groupListString << "g: " << i;
         if (groupSize > 0) {
-            groupListString << " (";
+            groupListString << "g: " << i;
+            groupListString << " = (";
             std::set<int> groupSet = getProcessData()->getProcessSetFromGroup(i);
             for (int process: groupSet) {
                 groupListString << process << ", ";

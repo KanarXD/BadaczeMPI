@@ -4,12 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/main.cpp" "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/main.cpp.o"
-  "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/models/ProcessData.cpp" "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/models/ProcessData.cpp.o"
-  "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/BaseThread.cpp" "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/threads/BaseThread.cpp.o"
-  "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/CommunicationThread.cpp" "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.o"
-  "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/threads/MainThread.cpp" "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/threads/MainThread.cpp.o"
-  "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/src/utility/Log.cpp" "/mnt/c/Users/picio/CLionProjects/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/utility/Log.cpp.o"
+  "/mnt/f/Szkoła/PRoz/BadaczeMPI/src/main.cpp" "/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/main.cpp.o"
+  "/mnt/f/Szkoła/PRoz/BadaczeMPI/src/models/ProcessData.cpp" "/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/models/ProcessData.cpp.o"
+  "/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/BaseThread.cpp" "/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/threads/BaseThread.cpp.o"
+  "/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/CommunicationThread.cpp" "/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/threads/CommunicationThread.cpp.o"
+  "/mnt/f/Szkoła/PRoz/BadaczeMPI/src/threads/MainThread.cpp" "/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/threads/MainThread.cpp.o"
+  "/mnt/f/Szkoła/PRoz/BadaczeMPI/src/utility/Log.cpp" "/mnt/f/Szkoła/PRoz/BadaczeMPI/cmake-build-debug/CMakeFiles/app.dir/src/utility/Log.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
