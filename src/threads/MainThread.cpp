@@ -99,7 +99,7 @@ void MainThread::releaseResource(ResourceType resourceType) {
                     resourceType,
                     getProcessData()->getGroupId()};
 
-    LOG("Sending release messages: ", message);
+    LOG("Sending release messages: ", message, " to: ALL");
 
     sendToAll(message);
 
@@ -118,13 +118,16 @@ void MainThread::sendToAll(const Message &message) const {
 
 
 void MainThread::sendMessageInGroup(int &messageCounter) {
+    std::set<int> currentGroup = getProcessData()->getCurrentGroup();
+    if (currentGroup.size() <= 1) {
+        return;
+    }
     Message message{getProcessData()->getProcessId(),
                     getProcessData()->incrementClock(),
                     MessageType::GROUP_TALK,
                     ResourceType::NONE,
                     getProcessData()->getGroupId()};
 
-    std::set<int> currentGroup = getProcessData()->getCurrentGroup();
     groupToString(currentGroup);
     for (int processId: currentGroup) {
         if (processId != getProcessData()->getProcessId()) {

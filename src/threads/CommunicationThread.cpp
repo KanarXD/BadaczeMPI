@@ -52,7 +52,7 @@ void CommunicationThread::handleRequest(const Message &message) {
             ||
             ((getProcessData()->getProcessState() == REQUESTING_UNR
               ||
-              getProcessData()->getProcessState() == REQUESTING_GROUP)
+              (getProcessData()->getProcessState() == REQUESTING_GROUP && message.resourceType == GROUP))
              &&
              (message.clock < getProcessData()->getClock()
               ||
@@ -75,14 +75,15 @@ void CommunicationThread::sendAck(const Message &incomingMessage) {
     Message outgoingMessage{getProcessData()->getProcessId(),
                             getProcessData()->getClock(),
                             MessageType::ACK,
-                            incomingMessage.resourceType};
-    LOGDEBUG("Sending ack message: ", outgoingMessage);
+                            incomingMessage.resourceType,
+                            incomingMessage.groupId};
+    LOG("Sending ack message: ", outgoingMessage, " to: ", incomingMessage.processId);
 
     MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
 }
 
 void CommunicationThread::handleAck(const Message &message) {
-    LOGDEBUG("handleAck, ack: ", getProcessData()->getAckCount());
+    LOG("handleAck message: ", message, "ack left: ", getProcessData()->getAckCount());
     if (
             (message.resourceType == ResourceType::UNR &&
              getProcessData()->getProcessState() == ProcessState::REQUESTING_UNR)
@@ -117,7 +118,7 @@ void CommunicationThread::handleRelease(Message incomingMessage) {
                                 MessageType::ACK,
                                 incomingMessage.resourceType,
                                 incomingMessage.groupId};
-        LOG("Sending release ACK: ", outgoingMessage);
+        LOG("Sending release ACK: ", outgoingMessage, " to: ", incomingMessage.processId);
         MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
     }
     handleAck(incomingMessage);

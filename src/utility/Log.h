@@ -32,8 +32,10 @@ public:
     static void LogColored(const M &...message) {
         std::stringstream stream;
         LogMessage(stream, message...);
-        printf("\033[0;%dm[id: %d][clock: %d][state: %s] %s \033[0;37m\n", color, processData->getProcessId(),
-               processData->getClock(), getResourceName(processData->getProcessState()).c_str(), stream.str().c_str());
+        printf("\033[0;%dm[id: %d][clock: %d][state: %s][group: %d] %s \033[0;37m\n", color,
+               processData->getProcessId(),
+               processData->getClock(), getResourceName(processData->getProcessState()).c_str(),
+               processData->getGroupId(), stream.str().c_str());
     }
 
 private:
