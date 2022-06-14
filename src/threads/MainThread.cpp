@@ -20,12 +20,12 @@ void MainThread::Start() {
                                getProcessData()->getSettings().UNRCount;
                 LOGDEBUG("Requesting UNR, count: ", unrCount);
                 requestResource(ResourceType::UNR, unrCount);
+                LOG("HAS UNR");
                 int groupId = (int) (Functions::getRandomNumber() % getProcessData()->getSettings().GroupCount);
-
                 getProcessData()->setGroupId(groupId);
                 getProcessData()->addProcessToGroup(groupId, getProcessData()->getProcessId());
                 getProcessData()->setProcessState(ProcessState::REQUESTING_GROUP);
-                LOGDEBUG("Requesting GROUP");
+                LOG("Requesting GROUP: ", getProcessData()->getGroupId());
             }
                 break;
             case REQUESTING_GROUP: {
@@ -39,19 +39,20 @@ void MainThread::Start() {
                 requestResource(ResourceType::GROUP,
                                 groupWaitCount);
                 getProcessData()->setProcessState(ProcessState::IN_GROUP);
-                LOGDEBUG("In GROUP");
+                LOG("In GROUP");
             }
                 break;
             case IN_GROUP:
                 if (sentMessagesInGroupCounter > 0 && Functions::makeDecision(30)) {
-                    LOGDEBUG("Leaving group");
+                    LOG("Leaving group");
                     getProcessData()->removeProcessFromGroup(getProcessData()->getGroupId(),
                                                              getProcessData()->getProcessId());
                     releaseResource(ResourceType::GROUP);
-                    LOGDEBUG("Releasing UNR");
+                    LOG("Releasing UNR");
                     getProcessData()->setGroupId(-1);
                     releaseResource(ResourceType::UNR);
                     getProcessData()->setProcessState(ProcessState::SLEEPING);
+                    LOG("Left group");
                 } else {
                     sendMessageInGroup(sentMessagesInGroupCounter);
                 }
@@ -59,6 +60,7 @@ void MainThread::Start() {
             case SLEEPING:
                 if (Functions::makeDecision(30)) {
                     getProcessData()->setProcessState(ProcessState::REQUESTING_UNR);
+                    LOG("Requesting UNR");
                 }
                 break;
         }

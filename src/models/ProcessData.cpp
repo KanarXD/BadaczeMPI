@@ -34,7 +34,7 @@ void ProcessData::addProcessToGroup(int group, int process) {
 
 void ProcessData::removeProcessFromGroup(int group, int process) {
     std::lock_guard _{groupListMutex};
-    LOG("removeProcessFromGroup process: ", process, ", group: ", group);
+    LOGDEBUG("removeProcessFromGroup process: ", process, ", group: ", group);
     groupList[group].erase(process);
 }
 

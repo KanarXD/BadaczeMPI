@@ -78,13 +78,13 @@ void CommunicationThread::sendAck(const Message &incomingMessage) {
                             MessageType::ACK,
                             incomingMessage.resourceType,
                             incomingMessage.groupId};
-    LOG("Sending ack message: ", outgoingMessage, " to: ", incomingMessage.processId);
+    LOGDEBUG("Sending ack message: ", outgoingMessage, " to: ", incomingMessage.processId);
 
     MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
 }
 
 void CommunicationThread::handleAck(const Message &message) {
-    LOG("handleAck message: ", message, "ack left: ", getProcessData()->getAckCount());
+    LOGDEBUG("handleAck message: ", message, "ack left: ", getProcessData()->getAckCount());
     if (
             (message.resourceType == ResourceType::UNR &&
              getProcessData()->getProcessState() == ProcessState::REQUESTING_UNR)
@@ -104,7 +104,7 @@ void CommunicationThread::releaseMainThread() const {
     }
     getProcessData()->setAckCount(getProcessData()->getAckCount() - 1);
     if (getProcessData()->getAckCount() == 0) {
-        getProcessData()->setRequestClock(-1);
+        getProcessData()->setRequestClock(INT32_MAX);
         getProcessData()->getWaitResourceMutex().unlock();
     }
     LOGDEBUG("releaseMainThread end, ack: ", getProcessData()->getAckCount());
@@ -120,14 +120,14 @@ void CommunicationThread::handleRelease(Message incomingMessage) {
                                 MessageType::ACK,
                                 incomingMessage.resourceType,
                                 incomingMessage.groupId};
-        LOG("Sending release ACK: ", outgoingMessage, " to: ", incomingMessage.processId);
+        LOGDEBUG("Sending release ACK: ", outgoingMessage, " to: ", incomingMessage.processId);
         MPI_Send(&outgoingMessage, sizeof(Message), MPI_BYTE, incomingMessage.processId, 0, MPI_COMM_WORLD);
     }
     handleAck(incomingMessage);
 }
 
 void CommunicationThread::handleGroupTalk(Message message) {
-    LOG("Handling group talk: ", message);
+    LOGDEBUG("Handling group talk: ", message);
     getProcessData()->getCurrentGroup().insert(message.processId);
 }
 
