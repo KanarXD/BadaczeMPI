@@ -94,3 +94,12 @@ void ProcessData::removeProcessFromCurrentGroup(int processId) {
     std::lock_guard _{currentGroupMutex};
     currentGroup.erase(processId);
 }
+
+int ProcessData::getRequestClock() const {
+    return requestClock;
+}
+
+void ProcessData::setRequestClock(int clock) {
+    std::lock_guard _{requestClockGroupMutex};
+    requestClock = clock;
+}

@@ -13,6 +13,7 @@ private:
     std::mutex groupListMutex;
     std::mutex waitResourceMutex;
     std::mutex currentGroupMutex;
+    std::mutex requestClockGroupMutex;
     int clock = 0;
     int processId;
     std::vector<std::set<int>> groupList;
@@ -21,6 +22,7 @@ private:
     std::atomic<int> ackCount{0};
     int groupId = -1;
     std::set<int> currentGroup;
+    int requestClock = INT32_MAX;
 public:
     ProcessData(int processId, const Settings &settings);
 
@@ -61,6 +63,10 @@ public:
     std::set<int> &getCurrentGroup();
 
     void removeProcessFromCurrentGroup(int processId);
+
+    int getRequestClock() const;
+
+    void setRequestClock(int clock);
 
 };
 

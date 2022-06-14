@@ -79,6 +79,7 @@ void MainThread::requestResource(ResourceType resourceType, int responseCount) {
                     resourceType,
                     getProcessData()->getGroupId()};
 
+    getProcessData()->setRequestClock(getProcessData()->getClock());
     LOG("Sending request messages: ", message, ", waiting for: ", responseCount, " ACK");
     sendToAll(message);
 

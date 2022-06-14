@@ -54,9 +54,10 @@ void CommunicationThread::handleRequest(const Message &message) {
               ||
               (getProcessData()->getProcessState() == REQUESTING_GROUP && message.resourceType == GROUP))
              &&
-             (message.clock < getProcessData()->getClock()
+             (message.clock < getProcessData()->getRequestClock()
               ||
-              (message.clock == getProcessData()->getClock() && message.processId < getProcessData()->getProcessId())))
+              (message.clock == getProcessData()->getRequestClock() &&
+               message.processId < getProcessData()->getProcessId())))
             ||
             (getProcessData()->getProcessState() == REQUESTING_UNR && message.resourceType == GROUP)
             ||
@@ -103,6 +104,7 @@ void CommunicationThread::releaseMainThread() const {
     }
     getProcessData()->setAckCount(getProcessData()->getAckCount() - 1);
     if (getProcessData()->getAckCount() == 0) {
+        getProcessData()->setRequestClock(-1);
         getProcessData()->getWaitResourceMutex().unlock();
     }
     LOGDEBUG("releaseMainThread end, ack: ", getProcessData()->getAckCount());
