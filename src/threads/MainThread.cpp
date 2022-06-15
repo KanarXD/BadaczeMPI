@@ -49,13 +49,12 @@ void MainThread::Start() {
                     getProcessData()->removeProcessFromGroup(getProcessData()->getGroupId(),
                                                              getProcessData()->getProcessId());
                     releaseResource(ResourceType::GROUP);
+                    getProcessData()->setRequestClock(INT32_MAX);
                     LOG("Releasing UNR");
                     getProcessData()->setGroupId(-1);
                     releaseResource(ResourceType::UNR);
                     getProcessData()->setRequestClock(INT32_MAX);
-
                     getProcessData()->setProcessState(ProcessState::SLEEPING);
-                    getProcessData()->setRequestClock(INT32_MAX);
 
                     LOG("Left group");
                 } else {
