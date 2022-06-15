@@ -69,6 +69,16 @@ void CommunicationThread::handleRequest(const Message &message) {
              message.groupId != getProcessData()->getGroupId())
             ) {
         sendAck(message);
+    } else {
+        LOGDEBUG("Not sending ack, message: ", message, "req clock: ", getProcessData()->getRequestClock(), ", value: ",
+                 ((getProcessData()->getProcessState() == REQUESTING_UNR
+                   ||
+                   (getProcessData()->getProcessState() == REQUESTING_GROUP && message.resourceType == GROUP))
+                  &&
+                  (message.clock < getProcessData()->getRequestClock()
+                   ||
+                   (message.clock == getProcessData()->getRequestClock() &&
+                    message.processId < getProcessData()->getProcessId()))));
     }
 }
 
@@ -86,13 +96,15 @@ void CommunicationThread::sendAck(const Message &incomingMessage) {
 void CommunicationThread::handleAck(const Message &message) {
     LOGDEBUG("handleAck message: ", message, "ack left: ", getProcessData()->getAckCount());
     if (
-            (message.resourceType == ResourceType::UNR &&
-             getProcessData()->getProcessState() == ProcessState::REQUESTING_UNR)
-            ||
-            (message.resourceType == ResourceType::GROUP && (
-                    getProcessData()->getProcessState() == ProcessState::REQUESTING_GROUP ||
-                    getProcessData()->getProcessState() == ProcessState::IN_GROUP))
-            ) {
+            message.clock >= getProcessData()->getRequestClock()
+            &&
+            ((message.resourceType == ResourceType::UNR &&
+              getProcessData()->getProcessState() == ProcessState::REQUESTING_UNR)
+             ||
+             (message.resourceType == ResourceType::GROUP && (
+                     getProcessData()->getProcessState() == ProcessState::REQUESTING_GROUP ||
+                     getProcessData()->getProcessState() == ProcessState::IN_GROUP))
+            )) {
         releaseMainThread();
     }
 }

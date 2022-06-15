@@ -20,6 +20,7 @@ void MainThread::Start() {
                                getProcessData()->getSettings().UNRCount;
                 LOGDEBUG("Requesting UNR, count: ", unrCount);
                 requestResource(ResourceType::UNR, unrCount);
+                getProcessData()->setRequestClock(INT32_MAX);
                 LOG("HAS UNR");
                 int groupId = (int) (Functions::getRandomNumber() % getProcessData()->getSettings().GroupCount);
                 getProcessData()->setGroupId(groupId);
@@ -36,8 +37,8 @@ void MainThread::Start() {
                 sentMessagesInGroupCounter = 0;
                 getProcessData()->setCurrentGroup(
                         getProcessData()->getProcessSetFromGroup(getProcessData()->getGroupId()));
-                requestResource(ResourceType::GROUP,
-                                groupWaitCount);
+                requestResource(ResourceType::GROUP, groupWaitCount);
+                getProcessData()->setRequestClock(INT32_MAX);
                 getProcessData()->setProcessState(ProcessState::IN_GROUP);
                 LOG("In GROUP");
             }
@@ -51,7 +52,11 @@ void MainThread::Start() {
                     LOG("Releasing UNR");
                     getProcessData()->setGroupId(-1);
                     releaseResource(ResourceType::UNR);
+                    getProcessData()->setRequestClock(INT32_MAX);
+
                     getProcessData()->setProcessState(ProcessState::SLEEPING);
+                    getProcessData()->setRequestClock(INT32_MAX);
+
                     LOG("Left group");
                 } else {
                     sendMessageInGroup(sentMessagesInGroupCounter);
@@ -91,16 +96,17 @@ void MainThread::requestResource(ResourceType resourceType, int responseCount) {
 }
 
 void MainThread::releaseResource(ResourceType resourceType) {
-    if (resourceType == GROUP && getProcessData()->getSettings().processCount > 1) {
-        getProcessData()->getWaitResourceMutex().lock();
-        getProcessData()->setAckCount(getProcessData()->getSettings().processCount - 1);
-    }
-
     Message message{getProcessData()->getProcessId(),
                     getProcessData()->incrementClock(),
                     MessageType::RELEASE,
                     resourceType,
                     getProcessData()->getGroupId()};
+
+    if (resourceType == GROUP && getProcessData()->getSettings().processCount > 1) {
+        getProcessData()->getWaitResourceMutex().lock();
+        getProcessData()->setAckCount(getProcessData()->getSettings().processCount - 1);
+        getProcessData()->setRequestClock(getProcessData()->getClock());
+    }
 
     LOG("Sending release messages: ", message, " to: ALL");
 
